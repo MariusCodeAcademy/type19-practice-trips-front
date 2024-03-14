@@ -2,8 +2,8 @@
 
 export default function App() {
   return (
-    <div>
-      <h1>App</h1>
+    <div className='container'>
+      <h1 className='display-1'>App</h1>
     </div>
   );
 }
