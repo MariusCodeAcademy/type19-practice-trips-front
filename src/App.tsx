@@ -1,12 +1,16 @@
 import './styles/App.css';
 
 import Header from './components/layout/Header';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 
 export default function App() {
   return (
     <div className=''>
       <Header />
-      <h1 className='display-1'>App</h1>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+      </Routes>
     </div>
   );
 }
