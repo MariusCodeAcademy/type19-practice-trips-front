@@ -81,6 +81,15 @@ Pradeti nuo boiler plate, su tailwind arba be.
 3. Puslapis dalinamas i 2 dalis kaireje paveikslelis, desineje informacija.
 4. Prideti mygtuka "Delete" kuris istrina kelione is back end jei vartotojas prisijunges ir savininkas
 
+### Add Trip Page
+
+1. Sukurti forma su laukais: name, date, country, city, rating, description, price, image_main, images_1, images_2, images_3
+2. Forma valdyti su useFormik.
+3. Validuoti visus laukus
+4. Siusti duomenis i back end ir sukurti nauja kelione
+5. Priklausomai nuo atsakymo parodyti pranesima ar pavyko ar ne
+6. Jei sekminga uzklausa nukreipti i Trips Page
+
 ### Countries Page
 
 1. kreiptis i musu back end ir gauti visas salis ir atvaizduoti jas korteliu pavidalu
