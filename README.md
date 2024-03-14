@@ -59,6 +59,8 @@ Laukai:
 
 ## Front end
 
+inspiration https://www.figma.com/community/file/1219890698200192960
+
 Sukurti projekta su vite, naudojant typescript.
 Pradeti nuo boiler plate, su tailwind arba be.
 
