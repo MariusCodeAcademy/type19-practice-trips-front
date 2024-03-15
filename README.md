@@ -10,6 +10,11 @@ Reikes sukurti du projektus:
 1. Back End - JSON REST API
 2. Front End - React aplikacija
 
+## Inspiration urls
+
+1. https://www.figma.com/community/file/1182308758714734501
+2. https://www.figma.com/community/file/1219890698200192960
+
 ## Back End
 
 1. Sukurti nauja express projekta prijungti reikiamas bibliotekas
