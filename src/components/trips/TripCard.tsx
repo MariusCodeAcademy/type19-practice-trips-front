@@ -15,7 +15,7 @@ export default function TripCard({ item }: TripCardProps) {
         <span className='fw-bold'>{item.country}</span> - {item.city}
       </p>
       <p className=''>{item.price} eur</p>
-      <Link to={'/'}>
+      <Link to={`/trips/${item.id}`}>
         <button className='btn btn-info'>Read more</button>
       </Link>
     </div>
