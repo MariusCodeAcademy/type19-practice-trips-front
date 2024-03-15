@@ -22,6 +22,11 @@ export default function Header() {
               </NavLink>
             </li>
             <li>
+              <NavLink className={'fs-5 px-3 py-2 d-block navLink'} to='/trips/add'>
+                Add Trip
+              </NavLink>
+            </li>
+            <li>
               <NavLink className={'fs-5 px-3 py-2 d-block navLink'} to='/countries'>
                 Countries
               </NavLink>
