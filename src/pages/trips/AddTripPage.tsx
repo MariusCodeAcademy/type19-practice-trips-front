@@ -4,9 +4,9 @@ import { TripObjType } from '../../types/types';
 type InputElProps = {
   placeholder: string;
   type?: 'text' | 'email' | 'number' | 'date' | 'textarea';
-  id: string;
-  // formik: FormikProps<Omit<TripObjType, 'id'>>;
-  formik: any;
+  id: keyof Omit<TripObjType, 'id'>;
+  formik: FormikProps<Omit<TripObjType, 'id'>>;
+  // formik: any;
 };
 function InputEl({ formik, id, placeholder, type = 'text' }: InputElProps) {
   // console.log('id ===', id);
