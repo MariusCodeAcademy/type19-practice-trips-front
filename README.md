@@ -126,3 +126,17 @@ Pradeti nuo boiler plate, su tailwind arba be.
 Reikalingas bendras state kuris butu pasiekiamas visuose komponentuose.
 Tai galima daryti su Context arba Redux.
 State turi buti issaugomas i localstorage ir po puslapio persikrovimo tureti ta pati state.
+
+## Header komponentas
+
+1. Sukurti Header komponenta
+2. Header turi tureti navigacija i Home, Trips, Countries, Add Trip, Auth
+3. Padaryti headeri pilnai responsive su burger menu
+4. sumazinus ekrana turi atsirasti burger menu kuri paspaudus matom navigacija
+5. didesniame ekrane turi buti matoma navigacija
+6. sukurti meniu taip kad "Add Trip" butu submeniu kuris atsidaro kai uzvedam pele ant jo
+   pvz (principas toks)
+   - desktop
+     ![](assets/2024-03-15-12-56-03.png)
+   - mobile
+     ![](assets/2024-03-15-12-59-05.png)
