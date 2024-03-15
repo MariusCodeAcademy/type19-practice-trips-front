@@ -73,6 +73,8 @@ Pradeti nuo boiler plate, su tailwind arba be.
 
 1. kreiptis i musu back end ir gauti visas keliones ir atvaizduotji jas korteliu pavidalu, be description ir be papildomu paveiksleliu.
 2. Kiekviena kortele turi nuoroda ir veda i Single Trip Page, Paveiklelis irgi turi buti nuoroda i Single Trip Page
+3. Sukurti pernaudojama komponenta TripCard ir atvaizduoti keliones
+4. Sukurti filtravima pagal sali ir miesta
 
 ### Single Trip Page
 
