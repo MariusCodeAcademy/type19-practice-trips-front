@@ -1,11 +1,12 @@
 //
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { TripObjType } from '../../types/types';
 import { beBaseUrl } from '../../config';
 import axios from 'axios';
 import { getNiceDate } from '../../utils/helpers';
+import toast from 'react-hot-toast';
 
 type tripParam = {
   readonly tripId: string;
@@ -15,13 +16,14 @@ export default function SingleTripPage() {
   const { tripId } = useParams() as tripParam;
 
   const [currentTrip, setCurrentTrip] = useState<TripObjType | null>(null);
+
   // parsisiusti Trip objekta
 
+  const cUrl = `${beBaseUrl}/trips/${tripId}`;
   useEffect(() => {
-    const cUrl = `${beBaseUrl}/trips/${tripId}`;
     console.log('cUrl ===', cUrl);
     getTrip(cUrl);
-  }, [tripId]);
+  }, [cUrl]);
 
   async function getTrip(url: string) {
     try {
@@ -37,6 +39,18 @@ export default function SingleTripPage() {
   // irasyti i state,
 
   // sugeneruoti html/jsx
+  const navigate = useNavigate();
+  async function handleDeleteTrip() {
+    try {
+      const resp = await axios.delete(cUrl);
+      console.log('resp ===', resp);
+      toast.success(`${currentTrip?.name} was deleted`);
+      navigate('/trips');
+    } catch (error) {
+      console.warn('error ===', error);
+      console.warn('klaida trinant');
+    }
+  }
 
   return (
     <div>
@@ -57,7 +71,9 @@ export default function SingleTripPage() {
           <p className=''>{currentTrip?.description}</p>
           <div className='control d-flex gap-2'>
             <button className='btn btn-secondary'>Go back</button>
-            <button className='btn btn-danger'>Delete</button>
+            <button onClick={handleDeleteTrip} className='btn btn-danger'>
+              Delete
+            </button>
           </div>
         </div>
       </div>
