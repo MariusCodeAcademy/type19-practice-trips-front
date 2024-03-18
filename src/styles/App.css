@@ -22,11 +22,13 @@
   transform: translateY(-200%);
   left: 0;
   min-width: 150px;
+  z-index: -1;
   /* bottom: 0; */
-  transition: transform 0.15s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 .hasChildren:hover .submenu {
   transform: translateY(0);
+  z-index: 0;
 }
 
 /* bootrstrap md media */

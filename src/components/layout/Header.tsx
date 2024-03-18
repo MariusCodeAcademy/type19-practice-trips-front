@@ -20,7 +20,9 @@ export function NavItem({ to, children, subItem }: NavItemProps) {
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  function closeMenu() {}
+  function closeMenu() {
+    setIsMenuOpen(false);
+  }
 
   return (
     <header className='bg-dark text-light position-relative '>
@@ -28,14 +30,16 @@ export default function Header() {
         <Link to={'/'}>
           <h2 className='mb-0 py-1'>Logo</h2>
         </Link>
-        <nav className={`${isMenuOpen ? 'on ' : ''} mobileMenu d-md-block bg-dark `}>
+        <nav
+          onClick={closeMenu}
+          className={`${isMenuOpen ? 'on ' : ''} mobileMenu d-md-block bg-dark `}>
           <ul className='unlisted d-flex flex-column flex-md-row  align-md-items-center'>
             <li>
               <NavItem to='/'>Home</NavItem>
             </li>
             <li className='hasChildren position-relative'>
               <NavItem to='/trips'>Trips</NavItem>
-              <ul className='submenu ps-3 ps-md-0 unlisted bg-dark z-n1 rounded-bottom-2 overflow-hidden'>
+              <ul className='submenu ps-3 ps-md-0 unlisted bg-dark  rounded-bottom-2 overflow-hidden'>
                 <li>
                   <NavItem subItem to='/trips/add'>
                     Add Trip
