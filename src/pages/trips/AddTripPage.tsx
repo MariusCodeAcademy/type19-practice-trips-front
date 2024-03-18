@@ -22,19 +22,6 @@ const initFormValues: TripObjTypeNoId = {
   images_3: '',
 };
 
-const tripValidatationSchema = Yup.object({
-  name: Yup.string().min(3).max(255).required(),
-  country: Yup.string().min(3).max(255).required(),
-  city: Yup.string().min(3).max(255).required(),
-  description: Yup.string().min(10).required(),
-  rating: Yup.number().min(0).max(5).required(),
-  price: Yup.number().min(0).required(),
-  image_main: Yup.string().min(3).max(255).required(),
-  images_1: Yup.string().min(3).max(255),
-  images_2: Yup.string().min(3).max(255),
-  images_3: Yup.string().min(3).max(255),
-});
-
 export default function AddTripPage() {
   // add formik
   const formik = useFormik<TripObjTypeNoId>({
@@ -57,6 +44,8 @@ export default function AddTripPage() {
       sendDataToBe(values);
     },
   });
+
+  formik.setErrors();
 
   const navigate = useNavigate();
 
