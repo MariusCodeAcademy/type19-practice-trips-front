@@ -7,9 +7,9 @@ export default function Header() {
     <header className='bg-dark text-light'>
       <div className='container d-flex justify-content-between align-items-center'>
         <Link to={'/'}>
-          <h2 className='mb-0'>Logo</h2>
+          <h2 className='mb-0 py-2'>Logo</h2>
         </Link>
-        <nav>
+        <nav className='d-none d-md-block'>
           <ul className='unlisted d-flex align-items-center'>
             <li>
               <NavLink className={'fs-5 px-3 py-2 d-block navLink'} to='/'>
@@ -33,6 +33,11 @@ export default function Header() {
             </li>
           </ul>
         </nav>
+        <div className='d-md-none'>
+          <button className='btn text-white'>
+            <i className='bi bi-list fs-3'></i>
+          </button>
+        </div>
       </div>
     </header>
   );
