@@ -1,9 +1,10 @@
 import { FormikProps, useFormik } from 'formik';
-import { TripObjType, TripObjTypeNoId } from '../../types/types';
+import { TripObjTypeNoId } from '../../types/types';
 import axios from 'axios';
 import { beBaseUrl } from '../../config';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import * as Yup from 'yup';
 
 type InputElProps = {
   placeholder: string;
@@ -21,11 +22,18 @@ function InputEl({ formik, id, placeholder, className, type = 'text' }: InputElP
       <Element
         value={formik.values[id]}
         onChange={formik.handleChange}
-        className='form-control'
+        onBlur={formik.handleBlur}
+        // isInvalid tik kai kalaida ir blur
+        className='form-control '
         type={type}
         id={id}
         placeholder={placeholder}
       />
+      {formik.errors[id] && formik.touched[id] && (
+        <span className='bg-danger-subtle rounded-1 d-block text-danger px-3 py-1 '>
+          {formik.errors[id]}
+        </span>
+      )}
     </label>
   );
 }
@@ -45,10 +53,36 @@ const initFormValues: TripObjTypeNoId = {
   images_3: '',
 };
 
+const tripValidatationSchema = Yup.object({
+  name: Yup.string().min(3).max(255).required(),
+  country: Yup.string().min(3).max(255).required(),
+  city: Yup.string().min(3).max(255).required(),
+  description: Yup.string().min(10).required(),
+  rating: Yup.number().min(0).max(5).required(),
+  price: Yup.number().min(0).required(),
+  image_main: Yup.string().min(3).max(255).required(),
+  images_1: Yup.string().min(3).max(255),
+  images_2: Yup.string().min(3).max(255),
+  images_3: Yup.string().min(3).max(255),
+});
+
 export default function AddTripPage() {
   // add formik
   const formik = useFormik<TripObjTypeNoId>({
     initialValues: { ...initFormValues },
+    validationSchema: Yup.object({
+      name: Yup.string().min(3).max(255).required(),
+      date: Yup.date().min('2024-03-18').required(),
+      country: Yup.string().min(3).max(255).required(),
+      city: Yup.string().min(3).max(255).required(),
+      description: Yup.string().min(10).required(),
+      rating: Yup.number().min(0).max(5).required(),
+      price: Yup.number().min(0).required(),
+      image_main: Yup.string().min(3).max(255).required(),
+      images_1: Yup.string().min(3).max(255),
+      images_2: Yup.string().min(3).max(255),
+      images_3: Yup.string().min(3).max(255),
+    }),
     onSubmit: (values) => {
       console.log('values ===', JSON.stringify(values, null, 2));
       sendDataToBe(values);
@@ -82,7 +116,7 @@ export default function AddTripPage() {
   // type FormikType = typeof formik
   // initial values formik
 
-  console.log('formik ===', formik.values);
+  console.log('formik klaidos ===', formik.errors);
 
   // sukurti likusius  InputEl
   return (
