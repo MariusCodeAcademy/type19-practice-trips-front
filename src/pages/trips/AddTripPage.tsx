@@ -5,38 +5,7 @@ import { beBaseUrl } from '../../config';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
-
-type InputElProps = {
-  placeholder: string;
-  type?: 'text' | 'email' | 'number' | 'date' | 'textarea';
-  id: keyof TripObjTypeNoId;
-  formik: FormikProps<TripObjTypeNoId>;
-  className?: string;
-};
-function InputEl({ formik, id, placeholder, className, type = 'text' }: InputElProps) {
-  // console.log('id ===', id);
-  const Element = type === 'textarea' ? 'textarea' : 'input';
-  return (
-    <label className={`form-label w-100 ${className}`}>
-      <span>{placeholder}</span>
-      <Element
-        value={formik.values[id]}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        // isInvalid tik kai kalaida ir blur
-        className='form-control '
-        type={type}
-        id={id}
-        placeholder={placeholder}
-      />
-      {formik.errors[id] && formik.touched[id] && (
-        <span className='bg-danger-subtle rounded-1 d-block text-danger px-3 py-1 '>
-          {formik.errors[id]}
-        </span>
-      )}
-    </label>
-  );
-}
+import InputEl from '../../components/UI/InputEl';
 
 const initFormValues: TripObjTypeNoId = {
   name: 'Trip to Jamaika',
