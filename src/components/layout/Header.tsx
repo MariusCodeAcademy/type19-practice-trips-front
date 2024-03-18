@@ -19,6 +19,9 @@ export function NavItem({ to, children, subItem }: NavItemProps) {
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  function closeMenu() {}
+
   return (
     <header className='bg-dark text-light position-relative '>
       <div className='container d-flex justify-content-between align-items-center'>
