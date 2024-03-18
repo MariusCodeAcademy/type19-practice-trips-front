@@ -1,19 +1,20 @@
 import { FormikProps, useFormik } from 'formik';
-import { TripObjType } from '../../types/types';
+import { TripObjType, TripObjTypeNoId } from '../../types/types';
 
 type InputElProps = {
   placeholder: string;
   type?: 'text' | 'email' | 'number' | 'date' | 'textarea';
-  id: keyof Omit<TripObjType, 'id'>;
-  formik: FormikProps<Omit<TripObjType, 'id'>>;
-  // formik: any;
+  id: keyof TripObjTypeNoId;
+  formik: FormikProps<TripObjTypeNoId>;
+  className?: string;
 };
-function InputEl({ formik, id, placeholder, type = 'text' }: InputElProps) {
+function InputEl({ formik, id, placeholder, className, type = 'text' }: InputElProps) {
   // console.log('id ===', id);
+  const Element = type === 'textarea' ? 'textarea' : 'input';
   return (
-    <label className='form-label w-100'>
+    <label className={`form-label w-100 ${className}`}>
       <span>{placeholder}</span>
-      <input
+      <Element
         value={formik.values[id]}
         onChange={formik.handleChange}
         className='form-control'
@@ -25,7 +26,7 @@ function InputEl({ formik, id, placeholder, type = 'text' }: InputElProps) {
   );
 }
 
-const initFormValues: Omit<TripObjType, 'id'> = {
+const initFormValues: TripObjTypeNoId = {
   name: 'Trip to Jamaika',
   date: '',
   country: 'Jamaika',
@@ -42,7 +43,7 @@ const initFormValues: Omit<TripObjType, 'id'> = {
 
 export default function AddTripPage() {
   // add formik
-  const formik = useFormik<Omit<TripObjType, 'id'>>({
+  const formik = useFormik<TripObjTypeNoId>({
     initialValues: { ...initFormValues },
     onSubmit: (values) => {
       console.log('values ===', JSON.stringify(values, null, 2));
@@ -68,34 +69,24 @@ export default function AddTripPage() {
         <h1 className='display-2'>AddTripPage</h1>
         <p>Welcome to our AddTripPage</p>
 
-        <form onSubmit={formik.handleSubmit} noValidate>
-          <label className='form-label w-100'>
-            <span>Name</span>
-            <input
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              className='form-control'
-              type='text'
-              name='name'
-              placeholder='Trip name'
-            />
-          </label>
+        <form className='addFromGrid ' onSubmit={formik.handleSubmit} noValidate>
           <InputEl formik={formik} id='name' placeholder='Enter Title' />
           <InputEl formik={formik} id='date' placeholder='Enter Date' type='date' />
           <InputEl formik={formik} id='country' placeholder='Enter country' />
           <InputEl formik={formik} id='city' placeholder='Enter city' />
-          <InputEl formik={formik} id='rating' placeholder='Enter rating' type='number' />
           <InputEl
+            className='gridSpan2'
             formik={formik}
             id='description'
             placeholder='Enter description'
             type='textarea'
           />
+          <InputEl formik={formik} id='rating' placeholder='Enter rating' type='number' />
           <InputEl formik={formik} id='price' placeholder='Enter price' type='number' />
           <InputEl formik={formik} id='image_main' placeholder='Enter main image' type='text' />
-          {/* <InputEl id='images_1' name='Enter image 1' type='text' />
-          <InputEl id='images_2' name='Enter image 2' type='text' />
-          <InputEl id='images_3' name='Enter image 3' type='text' /> */}
+          <InputEl formik={formik} id='images_1' placeholder='Enter image 1' type='text' />
+          <InputEl formik={formik} id='images_2' placeholder='Enter image 2' type='text' />
+          <InputEl formik={formik} id='images_3' placeholder='Enter image 3' type='text' />
 
           <button type='submit' className='btn btn-primary'>
             Add trip
