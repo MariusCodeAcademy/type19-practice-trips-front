@@ -11,7 +11,7 @@ type NavItemProps = {
 
 export function NavItem({ to, children, subItem }: NavItemProps) {
   return (
-    <NavLink className={`${subItem ? 'fs-6' : 'fs-5'} px-3 py-2 d-block navLink`} to={to}>
+    <NavLink end className={`${subItem ? 'fs-6' : 'fs-5'} px-3 py-2 d-block navLink`} to={to}>
       {children}
     </NavLink>
   );
