@@ -7,3 +7,21 @@
   text-decoration: underline;
   text-underline-offset: 5px;
 }
+
+.mobileMenu.on {
+  transform: translateX(0);
+}
+
+/* bootrstrap md media */
+@media screen and (max-width: 768px) {
+  .mobileMenu {
+    position: fixed;
+    background: tomato;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    min-width: 200px;
+    transition: transform 0.2s ease-in;
+    transform: translateX(100%);
+  }
+}
