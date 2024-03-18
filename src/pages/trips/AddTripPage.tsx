@@ -1,5 +1,9 @@
 import { FormikProps, useFormik } from 'formik';
 import { TripObjType, TripObjTypeNoId } from '../../types/types';
+import axios from 'axios';
+import { beBaseUrl } from '../../config';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 type InputElProps = {
   placeholder: string;
@@ -47,14 +51,32 @@ export default function AddTripPage() {
     initialValues: { ...initFormValues },
     onSubmit: (values) => {
       console.log('values ===', JSON.stringify(values, null, 2));
-      // sendDataToBe(data)
+      sendDataToBe(values);
     },
   });
 
-  function sendDataToBe(data) {
+  const navigate = useNavigate();
+
+  function sendDataToBe(data: TripObjTypeNoId) {
     // nusiuncia duomenis
-    // jei sekme tai naviguojam i trips
-    // jei nesekme tai rodom klaidas arba klaida
+    axios
+      .post(`${beBaseUrl}/trips`, data)
+      .then((resp) => {
+        console.log('resp ===', resp);
+        // jei sekme tai naviguojam i trips
+        if (resp.status === 200) {
+          // naviguoti
+          toast.success('Created Trip');
+          navigate('/trips');
+        } else {
+          console.warn('kazkas negerai back end status');
+        }
+      })
+      .catch((error) => {
+        console.warn('sendDataToBe ivyko klaida:', error);
+        toast.error('Somening went wrong');
+        // jei nesekme tai rodom klaidas arba klaida
+      });
   }
 
   // type FormikType = typeof formik
