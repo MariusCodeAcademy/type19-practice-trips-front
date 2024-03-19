@@ -16,32 +16,33 @@ export default function TripsPage() {
   console.log('tripsArr ===', tripsArr);
 
   useEffect(() => {
-    setIsLoading(true);
     // toast.loading('Loading...');
-    getPosts(`${beBaseUrl}/trips`).then((data) => {
-      setTripsArr(data);
-      setIsLoading(false);
-    });
+    getPosts(`${beBaseUrl}/trips`);
   }, []);
 
-  function getPosts(url: string): Promise<TripObjType[] | null> {
+  function getPosts(url: string) {
+    setIsLoading(true);
     // su axios gaunam postus ir irasom i tripsArr
-    return axios
+    axios
       .get(url)
       .then((resp) => {
         // console.log('resp.data ===', resp.data);
-        return resp.data;
+        setTripsArr(resp.data);
       })
       .catch((error: Error) => {
         console.warn('error cia cia cia ===', error);
         toast.error('Failed to fetch trips');
         setIsError('Kazkas neivyko kaip turejo, bandykit veliau');
         return null;
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
-  function filterBy() {
+  function filterBy(countryVal: string) {
     // parsiusti atfiltruotus duomenis
+    getPosts(`${beBaseUrl}/trips/filter?country=${countryVal}`);
   }
 
   return (
@@ -49,8 +50,12 @@ export default function TripsPage() {
       <div className='container'>
         <h1 className='display-2'>TripsPage</h1>
         <p>Welcome to our TripsPage</p>
-        <button className='btn btn-outline-dark'>filter by country = france</button>
-        <button className='btn btn-outline-dark'>filter by country = United Kingdom</button>
+        <button onClick={() => filterBy('france')} className='btn btn-outline-dark'>
+          filter by country = france
+        </button>
+        <button onClick={() => filterBy('United Kingdom')} className='btn btn-outline-dark'>
+          filter by country = United Kingdom
+        </button>
         {isLoading && <p className='alert alert-secondary mb-0'>Loading....</p>}
         {isError && <p className='alert alert-danger mb-0 text-center'>{isError}</p>}
         <div className='tripsPageGrid'>
