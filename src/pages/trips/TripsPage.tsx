@@ -8,6 +8,7 @@ import { TripObjType } from '../../types/types';
 import toast from 'react-hot-toast';
 import TripCard from '../../components/trips/TripCard';
 import FilterBox from '../../components/UI/FilterBox';
+import { Link, useSearchParams } from 'react-router-dom';
 
 export default function TripsPage() {
   const [tripsArr, setTripsArr] = useState<TripObjType[] | null>(null);
@@ -15,10 +16,18 @@ export default function TripsPage() {
   const [isError, setIsError] = useState<string>('');
   console.log('tripsArr ===', tripsArr);
 
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  console.log('searchParams ===', searchParams.get('country'));
+  const filterCountryVal = searchParams.get('country');
   useEffect(() => {
     // toast.loading('Loading...');
-    getPosts(`${beBaseUrl}/trips`);
-  }, []);
+    if (filterCountryVal) {
+      getPosts(`${beBaseUrl}/trips/filter?country=${filterCountryVal}`);
+    } else {
+      getPosts(`${beBaseUrl}/trips`);
+    }
+  }, [filterCountryVal]);
 
   function getPosts(url: string) {
     setIsLoading(true);
@@ -40,22 +49,31 @@ export default function TripsPage() {
       });
   }
 
-  function filterBy(countryVal: string) {
-    // parsiusti atfiltruotus duomenis
-    getPosts(`${beBaseUrl}/trips/filter?country=${countryVal}`);
-  }
+  // function filterBy(countryVal: string) {
+  //   // parsiusti atfiltruotus duomenis
+  //   getPosts(`${beBaseUrl}/trips/filter?country=${countryVal}`);
+  // }
 
   return (
     <div>
       <div className='container'>
         <h1 className='display-2'>TripsPage</h1>
         <p>Welcome to our TripsPage</p>
-        <button onClick={() => filterBy('france')} className='btn btn-outline-dark'>
+        <Link to={'/trips?country=france'} className='btn btn-outline-dark'>
           filter by country = france
-        </button>
-        <button onClick={() => filterBy('United Kingdom')} className='btn btn-outline-dark'>
+        </Link>
+        <Link to={'/trips?country=United Kingdom'} className='btn btn-outline-dark'>
+          filter by country = UK
+        </Link>
+        <Link to={'/trips?country=jamaika'} className='btn btn-outline-dark'>
+          filter by country = JM
+        </Link>
+        {/* <button onClick={() => filterBy('france')} className='btn btn-outline-dark'>
+          filter by country = france
+        </button> */}
+        {/* <button onClick={() => filterBy('United Kingdom')} className='btn btn-outline-dark'>
           filter by country = United Kingdom
-        </button>
+        </button> */}
         {isLoading && <p className='alert alert-secondary mb-0'>Loading....</p>}
         {isError && <p className='alert alert-danger mb-0 text-center'>{isError}</p>}
         <div className='tripsPageGrid'>
