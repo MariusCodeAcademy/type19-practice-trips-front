@@ -8,7 +8,7 @@ import { TripObjType } from '../../types/types';
 import toast from 'react-hot-toast';
 import TripCard from '../../components/trips/TripCard';
 import FilterBox from '../../components/UI/FilterBox';
-import { Link, useSearchParams } from 'react-router-dom';
+import Rating from '../../components/UI/Rating';
 
 export default function TripsPage() {
   const [tripsArr, setTripsArr] = useState<TripObjType[] | null>(null);
@@ -18,6 +18,9 @@ export default function TripsPage() {
 
   const [filterVal, setFilterVal] = useState('');
   // '/filter?country=france'
+  // '/filter?city=paris'
+  // '/filter?rating=3'
+  // '/filter?country=france&city=paris'&rating=3'
   useEffect(() => {
     // toast.loading('Loading...');
     if (filterVal) {
@@ -47,11 +50,6 @@ export default function TripsPage() {
       });
   }
 
-  // function filterBy(countryVal: string) {
-  //   // parsiusti atfiltruotus duomenis
-  //   getPosts(`${beBaseUrl}/trips/filter?country=${countryVal}`);
-  // }
-
   return (
     <div>
       <div className='container'>
@@ -75,7 +73,7 @@ export default function TripsPage() {
         {isLoading && <p className='alert alert-secondary mb-0'>Loading....</p>}
         {isError && <p className='alert alert-danger mb-0 text-center'>{isError}</p>}
         <div className='tripsPageGrid'>
-          <TripsFilters />
+          <TripsFilters onFilterChange={setFilterVal} />
 
           <ul className='unlisted '>
             {tripsArr?.map((tObj) => (
@@ -90,13 +88,52 @@ export default function TripsPage() {
   );
 }
 
-export function TripsFilters() {
+type TripsFiltersProps = {
+  onFilterChange: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
+  const [countySelVal, setCountySelVal] = useState('all');
+  console.log('countySelVal ===', countySelVal);
+  function countryChangeHandler(e: React.ChangeEvent<HTMLSelectElement>) {
+    setCountySelVal(e.target.value);
+    if (e.target.value === 'all') {
+      return onFilterChange('');
+    }
+    onFilterChange(`/filter?country=${e.target.value}`);
+    // setFilterVal('/filter?country=france')
+  }
+
   return (
     <div>
-      <FilterBox title='Filter by date'>
-        <div>pagal ta</div>
-        <div>pagal ana</div>
-        <div>pagal sali</div>
+      <FilterBox title='Filter by Country'>
+        <select
+          value={countySelVal}
+          onChange={countryChangeHandler}
+          className='form-select'
+          aria-label='Filter by Country'>
+          <option value={'all'}>Filter by Country</option>
+          <option value='france'>France</option>
+          <option value='united kingdom'>UK</option>
+          <option value='italy'>Italy</option>
+          <option value='jamaika'>Jamaika</option>
+        </select>
+      </FilterBox>
+      <FilterBox title='Filter by City'>
+        <select
+          value={countySelVal}
+          onChange={countryChangeHandler}
+          className='form-select'
+          aria-label='Filter by Country'>
+          <option value={'all'}>Filter by Country</option>
+          <option value='france'>France</option>
+          <option value='united kingdom'>UK</option>
+          <option value='italy'>Italy</option>
+          <option value='jamaika'>Jamaika</option>
+        </select>
+      </FilterBox>
+      <FilterBox title='Filter by Rating'>
+        <Rating rating={5} />
       </FilterBox>
     </div>
   );
