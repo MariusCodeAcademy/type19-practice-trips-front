@@ -17,7 +17,7 @@ export default function InputEl({
 }: InputElProps) {
   const Element = type === 'textarea' ? 'textarea' : 'input';
 
-  const isError = formik.errors[id] && formik.touched[id];
+  const isError = formik.errors && formik.errors[id] && formik.touched && formik.touched[id];
   return (
     <label className={`form-label w-100 ${className}`}>
       <span>{placeholder}</span>

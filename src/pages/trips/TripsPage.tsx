@@ -4,9 +4,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { beBaseUrl } from '../../config';
 import { TripObjType } from '../../types/types';
-import { Link } from 'react-router-dom';
+
 import toast from 'react-hot-toast';
 import TripCard from '../../components/trips/TripCard';
+import FilterBox from '../../components/UI/FilterBox';
 
 export default function TripsPage() {
   const [tripsArr, setTripsArr] = useState<TripObjType[] | null>(null);
@@ -46,14 +47,30 @@ export default function TripsPage() {
         <p>Welcome to our TripsPage</p>
         {isLoading && <p className='alert alert-secondary mb-0'>Loading....</p>}
         {isError && <p className='alert alert-danger mb-0 text-center'>{isError}</p>}
-        <ul className='unlisted '>
-          {tripsArr?.map((tObj) => (
-            <li className='' key={tObj.id}>
-              <TripCard item={tObj} />
-            </li>
-          ))}
-        </ul>
+        <div className='tripsPageGrid'>
+          <TripsFilters />
+
+          <ul className='unlisted '>
+            {tripsArr?.map((tObj) => (
+              <li className='mb-4' key={tObj.id}>
+                <TripCard item={tObj} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
+    </div>
+  );
+}
+
+export function TripsFilters() {
+  return (
+    <div>
+      <FilterBox title='Filter by date'>
+        <div>pagal ta</div>
+        <div>pagal ana</div>
+        <div>pagal sali</div>
+      </FilterBox>
     </div>
   );
 }
