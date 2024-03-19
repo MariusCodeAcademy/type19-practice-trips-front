@@ -26,19 +26,19 @@ export default function AddTripPage() {
   // add formik
   const formik = useFormik<TripObjTypeNoId>({
     initialValues: { ...initFormValues },
-    // validationSchema: Yup.object({
-    //   name: Yup.string().min(3).max(255).required(),
-    //   date: Yup.date().min('2024-03-18').required(),
-    //   country: Yup.string().min(3).max(255).required(),
-    //   city: Yup.string().min(3).max(255).required(),
-    //   description: Yup.string().min(10).required(),
-    //   rating: Yup.number().min(0).max(5).required(),
-    //   price: Yup.number().min(0).required(),
-    //   image_main: Yup.string().min(3).max(255).required(),
-    //   images_1: Yup.string().min(3).max(255),
-    //   images_2: Yup.string().min(3).max(255),
-    //   images_3: Yup.string().min(3).max(255),
-    // }),
+    validationSchema: Yup.object({
+      name: Yup.string().min(3).max(255).required(),
+      date: Yup.date().min('2024-03-18').required(),
+      country: Yup.string().min(3).max(255).required(),
+      city: Yup.string().min(3).max(255).required(),
+      description: Yup.string().min(10).required(),
+      rating: Yup.number().min(0).max(5).required(),
+      price: Yup.number().min(0).required(),
+      image_main: Yup.string().min(3).max(255).required(),
+      images_1: Yup.string().min(3).max(255),
+      images_2: Yup.string().min(3).max(255),
+      images_3: Yup.string().min(3).max(255),
+    }),
     onSubmit: (values) => {
       // console.log('values ===', JSON.stringify(values, null, 2));
       // nesiusti images_*
