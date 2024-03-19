@@ -16,18 +16,16 @@ export default function TripsPage() {
   const [isError, setIsError] = useState<string>('');
   console.log('tripsArr ===', tripsArr);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  console.log('searchParams ===', searchParams.get('country'));
-  const filterCountryVal = searchParams.get('country');
+  const [filterVal, setFilterVal] = useState('');
+  // '/filter?country=france'
   useEffect(() => {
     // toast.loading('Loading...');
-    if (filterCountryVal) {
-      getPosts(`${beBaseUrl}/trips/filter?country=${filterCountryVal}`);
+    if (filterVal) {
+      getPosts(`${beBaseUrl}/trips/${filterVal}`);
     } else {
       getPosts(`${beBaseUrl}/trips`);
     }
-  }, [filterCountryVal]);
+  }, [filterVal]);
 
   function getPosts(url: string) {
     setIsLoading(true);
@@ -59,21 +57,21 @@ export default function TripsPage() {
       <div className='container'>
         <h1 className='display-2'>TripsPage</h1>
         <p>Welcome to our TripsPage</p>
-        <Link to={'/trips?country=france'} className='btn btn-outline-dark'>
+
+        <button onClick={() => setFilterVal('')} className='btn btn-outline-dark'>
+          All
+        </button>
+        <button
+          onClick={() => setFilterVal('/filter?country=france')}
+          className='btn btn-outline-dark'>
           filter by country = france
-        </Link>
-        <Link to={'/trips?country=United Kingdom'} className='btn btn-outline-dark'>
-          filter by country = UK
-        </Link>
-        <Link to={'/trips?country=jamaika'} className='btn btn-outline-dark'>
-          filter by country = JM
-        </Link>
-        {/* <button onClick={() => filterBy('france')} className='btn btn-outline-dark'>
-          filter by country = france
-        </button> */}
-        {/* <button onClick={() => filterBy('United Kingdom')} className='btn btn-outline-dark'>
-          filter by country = United Kingdom
-        </button> */}
+        </button>
+        <button
+          onClick={() => setFilterVal('/filter?country=United Kingdom')}
+          className='btn btn-outline-dark'>
+          UK
+        </button>
+
         {isLoading && <p className='alert alert-secondary mb-0'>Loading....</p>}
         {isError && <p className='alert alert-danger mb-0 text-center'>{isError}</p>}
         <div className='tripsPageGrid'>
