@@ -16,7 +16,7 @@ export default function TripsPage() {
   const [isError, setIsError] = useState<string>('');
   console.log('tripsArr ===', tripsArr);
 
-  let [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   console.log('searchParams ===', searchParams.get('country'));
   const filterCountryVal = searchParams.get('country');
