@@ -10,7 +10,7 @@ type TripCardProps = {
 export default function TripCard({ item }: TripCardProps) {
   return (
     <div className='border p-4 rounded tripGrid'>
-      <img src={item.image_main} alt={item.name} className='img-fluid' />
+      <img src={'/img/' + item.image_main} alt={item.name} className='img-fluid' />
       <div className='info'>
         <h3 className='h4'>{item.name}</h3>
         <p className='lead'>{getNiceDate(item.date)}</p>
