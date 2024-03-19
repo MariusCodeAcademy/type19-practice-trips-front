@@ -40,11 +40,17 @@ export default function TripsPage() {
       });
   }
 
+  function filterBy() {
+    // parsiusti atfiltruotus duomenis
+  }
+
   return (
     <div>
       <div className='container'>
         <h1 className='display-2'>TripsPage</h1>
         <p>Welcome to our TripsPage</p>
+        <button className='btn btn-outline-dark'>filter by country = france</button>
+        <button className='btn btn-outline-dark'>filter by country = United Kingdom</button>
         {isLoading && <p className='alert alert-secondary mb-0'>Loading....</p>}
         {isError && <p className='alert alert-danger mb-0 text-center'>{isError}</p>}
         <div className='tripsPageGrid'>
