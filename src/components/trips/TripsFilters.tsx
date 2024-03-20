@@ -18,22 +18,44 @@ export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
     onFilterChange(`/filter?country=${e.target.value}`);
     // setFilterVal('/filter?country=france')
   }
+  function cityChangeHandler(e: React.ChangeEvent<HTMLSelectElement>) {
+    // setCountySelVal(e.target.value);
+    if (e.target.value === 'all') {
+      return onFilterChange('');
+    }
+    onFilterChange(`/filter?city=${e.target.value}`);
+    // setFilterVal('/filter?country=france')
+  }
 
   const [starsSelected, setStarsSelected] = useState(2);
 
   const [countriesArr, setCountriesArr] = useState<{ country: string }[]>([]);
-  console.log('countriesArr ===', countriesArr);
+  const [citiesArr, setCitiesArr] = useState<{ city: string }[]>([]);
+  // console.log('countriesArr ===', countriesArr);
+  console.log('citiesArr ===', citiesArr);
   useEffect(() => {
     // get countries
     getCountries();
+    getCities();
   }, []);
 
   function getCountries() {
     axios
       .get(`${beBaseUrl}/trips/countries`)
       .then((resp) => {
-        console.log('resp.data ===', resp.data);
+        // console.log('resp.data ===', resp.data);
         setCountriesArr(resp.data);
+      })
+      .catch((error) => {
+        console.warn('error ===', error);
+      });
+  }
+  function getCities() {
+    axios
+      .get(`${beBaseUrl}/trips/cities`)
+      .then((resp) => {
+        // console.log('resp.data ===', resp.data);
+        setCitiesArr(resp.data);
       })
       .catch((error) => {
         console.warn('error ===', error);
@@ -58,15 +80,16 @@ export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
       </FilterBox>
       <FilterBox title='Filter by City'>
         <select
-          value={countySelVal}
-          onChange={countryChangeHandler}
+          // value={countySelVal}
+          onChange={cityChangeHandler}
           className='form-select'
-          aria-label='Filter by Country'>
-          <option value={'all'}>Filter by Country</option>
-          <option value='france'>France</option>
-          <option value='united kingdom'>UK</option>
-          <option value='italy'>Italy</option>
-          <option value='jamaika'>Jamaika</option>
+          aria-label='Filter by City'>
+          <option value={'all'}>Filter by City</option>
+          {citiesArr.map((cObj) => (
+            <option key={cObj.city} value={cObj.city}>
+              {cObj.city}
+            </option>
+          ))}
         </select>
       </FilterBox>
       <FilterBox title='Filter by Rating'>
