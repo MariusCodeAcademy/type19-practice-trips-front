@@ -9,25 +9,20 @@ type TripsFiltersProps = {
 
 export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
   const [countySelVal, setCountySelVal] = useState('all');
-  console.log('countySelVal ===', countySelVal);
-  function countryChangeHandler(e: React.ChangeEvent<HTMLSelectElement>) {
-    setCountySelVal(e.target.value);
-    if (e.target.value === 'all') {
-      return onFilterChange('');
-    }
-    onFilterChange(`/filter?country=${e.target.value}`);
-    // setFilterVal('/filter?country=france')
-  }
-  function cityChangeHandler(e: React.ChangeEvent<HTMLSelectElement>) {
-    // setCountySelVal(e.target.value);
-    if (e.target.value === 'all') {
-      return onFilterChange('');
-    }
-    onFilterChange(`/filter?city=${e.target.value}`);
-    // setFilterVal('/filter?country=france')
-  }
+  const [citySelValue, setCitySelValue] = useState('all');
+  const [starsSelected, setStarsSelected] = useState(0);
 
-  const [starsSelected, setStarsSelected] = useState(2);
+  useEffect(() => {
+    console.log('pasikeite');
+    console.log('countySelVal ===', countySelVal);
+    console.log('citySelValue ===', citySelValue);
+    let finalFilterString = `/filter?`;
+    if (countySelVal !== 'all') finalFilterString += `country=${countySelVal}`;
+    if (citySelValue !== 'all') finalFilterString += `&city=${citySelValue}`;
+    if (starsSelected !== 0) finalFilterString += `&rating=${starsSelected}`;
+    console.log('finalFilterString ===', finalFilterString);
+    onFilterChange(finalFilterString);
+  }, [countySelVal, citySelValue, starsSelected]);
 
   const [countriesArr, setCountriesArr] = useState<{ country: string }[]>([]);
   const [citiesArr, setCitiesArr] = useState<{ city: string }[]>([]);
@@ -62,12 +57,21 @@ export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
       });
   }
 
+  const noFilterActive = countySelVal === 'all' && citySelValue === 'all' && starsSelected === 0;
+
   return (
     <div>
+      {!noFilterActive && (
+        <FilterBox className='bg-primary-subtle' title='Active Filters'>
+          {countySelVal !== 'all' && <p>Country: {countySelVal}</p>}
+          {citySelValue !== 'all' && <p>City: {citySelValue}</p>}
+          {starsSelected !== 0 && <p>Rating: more than {starsSelected}</p>}
+        </FilterBox>
+      )}
       <FilterBox title='Filter by Country'>
         <select
           value={countySelVal}
-          onChange={countryChangeHandler}
+          onChange={(e) => setCountySelVal(e.target.value)}
           className='form-select'
           aria-label='Filter by Country'>
           <option value={'all'}>Filter by Country</option>
@@ -80,8 +84,8 @@ export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
       </FilterBox>
       <FilterBox title='Filter by City'>
         <select
-          // value={countySelVal}
-          onChange={cityChangeHandler}
+          value={citySelValue}
+          onChange={(e) => setCitySelValue(e.target.value)}
           className='form-select'
           aria-label='Filter by City'>
           <option value={'all'}>Filter by City</option>
