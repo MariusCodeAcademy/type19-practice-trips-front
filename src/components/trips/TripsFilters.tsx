@@ -101,32 +101,32 @@ export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
           <button
             onClick={() => setStarsSelected(1)}
             type='button'
-            className={`btn btn${starsSelected === 1 ? '' : '-outline'}-secondary`}>
-            1 star
+            className={`btn btn${starsSelected === 1 ? '' : '-outline'}-secondary d-flex`}>
+            1 <i className='bi bi-star-fill text-warning h5'></i>
           </button>
           <button
             onClick={() => setStarsSelected(2)}
             type='button'
-            className={`btn btn${starsSelected === 2 ? '' : '-outline'}-secondary`}>
-            2
+            className={`btn btn${starsSelected === 2 ? '' : '-outline'}-secondary d-flex`}>
+            2 <i className='bi bi-star-fill text-warning h5'></i>
           </button>
           <button
             onClick={() => setStarsSelected(3)}
             type='button'
-            className={`btn btn${starsSelected === 3 ? '' : '-outline'}-secondary`}>
-            3
+            className={`btn btn${starsSelected === 3 ? '' : '-outline'}-secondary d-flex`}>
+            3 <i className='bi bi-star-fill text-warning h5'></i>
           </button>
           <button
             onClick={() => setStarsSelected(4)}
             type='button'
-            className={`btn btn${starsSelected === 4 ? '' : '-outline'}-secondary`}>
-            4
+            className={`btn btn${starsSelected === 4 ? '' : '-outline'}-secondary d-flex`}>
+            4 <i className='bi bi-star-fill text-warning h5'></i>
           </button>
           <button
             onClick={() => setStarsSelected(5)}
             type='button'
-            className={`btn btn${starsSelected === 5 ? '' : '-outline'}-secondary`}>
-            5
+            className={`btn btn${starsSelected === 5 ? '' : '-outline'}-secondary d-flex`}>
+            5 <i className='bi bi-star-fill text-warning h5'></i>
           </button>
         </div>
         <br />

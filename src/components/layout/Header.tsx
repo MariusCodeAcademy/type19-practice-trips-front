@@ -56,8 +56,14 @@ export default function Header() {
             <li>
               <NavItem to='/countries'>Countries</NavItem>
             </li>
-            <li>
+            {/* <li>
               <NavItem to='/auth'>Auth</NavItem>
+            </li> */}
+            <li>
+              <NavItem to='/auth/register'>Register</NavItem>
+            </li>
+            <li>
+              <NavItem to='/auth/login'>Login</NavItem>
             </li>
           </ul>
         </nav>

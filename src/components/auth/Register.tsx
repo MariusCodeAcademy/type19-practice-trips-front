@@ -6,6 +6,7 @@ type RegisterUserObjType = {
   name?: string;
   email: string;
   password: string;
+  passwordConfirm: string;
 };
 
 export default function Register() {
@@ -14,6 +15,7 @@ export default function Register() {
       name: '',
       email: '',
       password: '',
+      passwordConfirm: '',
     },
     onSubmit: (values) => {
       console.log(values);
@@ -24,22 +26,17 @@ export default function Register() {
       <div className='container min-vh-100 mt-5'>
         <h1 className='h3 text-center'>Register</h1>
 
-        <form>
-          <div className='mb-3'>
-            <InputEl formik={formik} placeholder='Name' type='text' id='name' />
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='email' className='form-label'>
-              Email
-            </label>
-            <input type='email' className='form-control' id='email' />
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='password' className='form-label'>
-              Password
-            </label>
-            <input type='password' className='form-control' id='password' />
-          </div>
+        <form onSubmit={formik.handleSubmit}>
+          <InputEl formik={formik} placeholder='Name' type='text' id='name' />
+          <InputEl formik={formik} placeholder='Email' type='email' id='email' />
+          <InputEl formik={formik} placeholder='Password' type='password' id='password' />
+          <InputEl
+            formik={formik}
+            placeholder='Password confirm'
+            type='password'
+            id='passwordConfirm'
+          />
+
           <button type='submit' className='btn btn-primary'>
             Register
           </button>

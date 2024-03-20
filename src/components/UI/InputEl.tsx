@@ -3,9 +3,11 @@ import { TripObjTypeNoId } from '../../types/types';
 
 type InputElProps = {
   placeholder: string;
-  type?: 'text' | 'email' | 'number' | 'date' | 'textarea';
-  id: keyof TripObjTypeNoId;
-  formik: FormikProps<TripObjTypeNoId>;
+  type?: 'text' | 'email' | 'number' | 'date' | 'textarea' | 'password';
+  // id: keyof TripObjTypeNoId;
+  // formik: FormikProps<TripObjTypeNoId>;
+  id: string;
+  formik: any;
   className?: string;
 };
 
