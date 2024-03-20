@@ -1,12 +1,13 @@
 import React from 'react';
 import InputEl from '../UI/InputEl';
 import { useFormik } from 'formik';
+import { object, string, ref } from 'yup';
 
 type RegisterUserObjType = {
   name?: string;
   email: string;
   password: string;
-  passwordConfirm: string;
+  passwordConfirm?: string;
 };
 
 export default function Register() {
@@ -17,8 +18,21 @@ export default function Register() {
       password: '',
       passwordConfirm: '',
     },
+    validationSchema: object({
+      name: string().min(3).max(255),
+      email: string().email().required(),
+      password: string().min(4).max(100).required(),
+      passwordConfirm: string()
+        .oneOf([ref('password')], 'Passwords must match')
+        .required(),
+    }),
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
+      const finalObjToBack = {
+        ...values,
+      };
+      delete finalObjToBack.passwordConfirm;
+      console.log('finalObjToBack ===', finalObjToBack);
     },
   });
   return (
@@ -26,7 +40,7 @@ export default function Register() {
       <div className='container min-vh-100 mt-5'>
         <h1 className='h3 text-center'>Register</h1>
 
-        <form onSubmit={formik.handleSubmit}>
+        <form noValidate onSubmit={formik.handleSubmit}>
           <InputEl formik={formik} placeholder='Name' type='text' id='name' />
           <InputEl formik={formik} placeholder='Email' type='email' id='email' />
           <InputEl formik={formik} placeholder='Password' type='password' id='password' />
