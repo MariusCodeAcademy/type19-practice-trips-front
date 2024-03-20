@@ -8,6 +8,7 @@ type InputElProps = {
   formik: FormikProps<TripObjTypeNoId>;
   className?: string;
 };
+
 export default function InputEl({
   formik,
   id,

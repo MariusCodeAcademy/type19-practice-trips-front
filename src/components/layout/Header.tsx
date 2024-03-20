@@ -56,6 +56,9 @@ export default function Header() {
             <li>
               <NavItem to='/countries'>Countries</NavItem>
             </li>
+            <li>
+              <NavItem to='/auth'>Auth</NavItem>
+            </li>
           </ul>
         </nav>
         <div className='d-md-none'>
