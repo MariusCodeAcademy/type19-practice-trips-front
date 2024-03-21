@@ -29,7 +29,7 @@ export default function Login() {
       .post(`${beBaseUrl}/auth/login`, loginObj)
       .then((res) => {
         console.log('res.data ===', res.data);
-        // login(res.data.email);
+        login(res.data.email);
       })
       .catch((err) => {
         console.log('err ===', err);

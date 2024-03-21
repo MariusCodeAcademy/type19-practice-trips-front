@@ -47,10 +47,10 @@ export default function Register() {
       .post(`${beBaseUrl}/auth/register`, data)
       .then((res) => {
         console.log('res.data ===', res.data);
-        login(data.email);
+        // login(data.email);
       })
       .catch((err) => {
-        console.log('err ===', err);
+        console.log('err ===', err.response.data);
       });
   }
 
@@ -74,6 +74,7 @@ export default function Register() {
             Register
           </button>
         </form>
+        <p>Registered? login here</p>
       </div>
     </div>
   );

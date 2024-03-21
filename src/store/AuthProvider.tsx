@@ -52,3 +52,5 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 export function useAuthCtx() {
   return useContext(AuthContext);
 }
+
+// export const useAuthCtx = () => useContext(AuthContext);

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useAuthCtx } from '../../store/AuthProvider';
 
 type NavItemProps = {
   to: string;
@@ -18,6 +19,7 @@ export function NavItem({ to, children, subItem }: NavItemProps) {
 }
 
 export default function Header() {
+  const { isUserLoggedIn } = useAuthCtx();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function closeMenu() {
@@ -56,15 +58,21 @@ export default function Header() {
             <li>
               <NavItem to='/countries'>Countries</NavItem>
             </li>
-            {/* <li>
-              <NavItem to='/auth'>Auth</NavItem>
-            </li> */}
-            <li>
-              <NavItem to='/auth/register'>Register</NavItem>
-            </li>
-            <li>
-              <NavItem to='/auth/login'>Login</NavItem>
-            </li>
+            {isUserLoggedIn && (
+              <li>
+                <NavItem to='/auth/login'>Logout</NavItem>
+              </li>
+            )}
+            {!isUserLoggedIn && (
+              <>
+                <li>
+                  <NavItem to='/auth/register'>Register</NavItem>
+                </li>
+                <li>
+                  <NavItem to='/auth/login'>Login</NavItem>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
         <div className='d-md-none'>

@@ -81,3 +81,13 @@
     transform: translateY(0);
   }
 }
+@media screen and (min-width: 1200px) {
+  .tripsList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 24px;
+  }
+  .tripGrid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

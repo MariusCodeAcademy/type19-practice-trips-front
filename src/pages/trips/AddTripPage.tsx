@@ -5,7 +5,7 @@ import { beBaseUrl } from '../../config';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
-import InputEl from '../../components/UI/InputEl';
+import { InputEl } from '../../components/UI/InputEl';
 
 const initFormValues: TripObjTypeNoId = {
   name: 'Trip to Jamaika',
