@@ -24,7 +24,7 @@ export function NavItem({ to, children, subItem, onClick }: NavItemProps) {
 }
 
 export default function Header() {
-  const { isUserLoggedIn, logout } = useAuthCtx();
+  const { isUserLoggedIn, logout, email } = useAuthCtx();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function closeMenu() {
@@ -63,7 +63,7 @@ export default function Header() {
             <li>
               <NavItem to='/countries'>Countries</NavItem>
             </li>
-            <li>test user email i headeri kai prisijunges</li>
+
             {isUserLoggedIn && (
               <>
                 <li>
@@ -74,6 +74,7 @@ export default function Header() {
                     Logout
                   </NavItem>
                 </li>
+                <li className='text-white mb-0 px-3 py-2 d-block navLink'>{email}</li>
               </>
             )}
             {!isUserLoggedIn && (
