@@ -22,7 +22,7 @@ type AuthProviderProps = {
 
 // sukurti AuthProvider
 export default function AuthProvider({ children }: AuthProviderProps) {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('james@bond.com');
 
   // const isUserLoggedIn = !!email;
   const isUserLoggedIn = Boolean(email);

@@ -12,6 +12,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import { useAuthCtx } from './store/AuthProvider';
 import UserPage from './pages/UserPage';
+import UserTrips from './pages/UserTrips';
 
 export default function App() {
   const { isUserLoggedIn } = useAuthCtx();
@@ -33,6 +34,10 @@ export default function App() {
         <Route
           path='/user'
           element={isUserLoggedIn ? <UserPage /> : <Navigate to={'/auth/login'} />}
+        />
+        <Route
+          path='/user/user-trips'
+          element={isUserLoggedIn ? <UserTrips /> : <Navigate to={'/auth/login'} />}
         />
         <Route path='/trips' element={<TripsPage />} />
         <Route path='/trips/add' element={<AddTripPage />} />
