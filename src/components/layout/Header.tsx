@@ -8,18 +8,23 @@ type NavItemProps = {
   to: string;
   children: string;
   subItem?: boolean;
+  onClick?: () => void;
 };
 
-export function NavItem({ to, children, subItem }: NavItemProps) {
+export function NavItem({ to, children, subItem, onClick }: NavItemProps) {
   return (
-    <NavLink end className={`${subItem ? 'fs-6' : 'fs-5'} px-3 py-2 d-block navLink`} to={to}>
+    <NavLink
+      onClick={onClick}
+      end
+      className={`${subItem ? 'fs-6' : 'fs-5'} px-3 py-2 d-block navLink`}
+      to={to}>
       {children}
     </NavLink>
   );
 }
 
 export default function Header() {
-  const { isUserLoggedIn } = useAuthCtx();
+  const { isUserLoggedIn, logout } = useAuthCtx();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function closeMenu() {
@@ -59,9 +64,16 @@ export default function Header() {
               <NavItem to='/countries'>Countries</NavItem>
             </li>
             {isUserLoggedIn && (
-              <li>
-                <NavItem to='/auth/login'>Logout</NavItem>
-              </li>
+              <>
+                <li>
+                  <NavItem to='/user'>My Space</NavItem>
+                </li>
+                <li>
+                  <NavItem onClick={logout} to='/auth/login'>
+                    Logout
+                  </NavItem>
+                </li>
+              </>
             )}
             {!isUserLoggedIn && (
               <>

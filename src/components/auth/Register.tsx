@@ -7,6 +7,7 @@ import { beBaseUrl } from '../../config';
 import { useAuthCtx } from '../../store/AuthProvider';
 
 import { InputEl } from '../UI/InputEl';
+import { Link } from 'react-router-dom';
 
 type RegisterUserObjType = {
   name?: string;
@@ -47,7 +48,7 @@ export default function Register() {
       .post(`${beBaseUrl}/auth/register`, data)
       .then((res) => {
         console.log('res.data ===', res.data);
-        // login(data.email);
+        login(data.email);
       })
       .catch((err) => {
         console.log('err ===', err.response.data);
@@ -74,7 +75,9 @@ export default function Register() {
             Register
           </button>
         </form>
-        <p>Registered? login here</p>
+        <p>
+          Registered? <Link to={'/auth/login'}>login here</Link>
+        </p>
       </div>
     </div>
   );

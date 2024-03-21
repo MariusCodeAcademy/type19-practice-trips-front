@@ -5,6 +5,7 @@ import { useAuthCtx } from '../../store/AuthProvider';
 import { InputEl } from '../UI/InputEl';
 import { useFormik } from 'formik';
 import { UserObjType } from '../../types/types';
+import { Link } from 'react-router-dom';
 
 type LoginObjType = Pick<UserObjType, 'email' | 'password'>;
 
@@ -45,9 +46,9 @@ export default function Login() {
           Login
         </button>
       </form>
-      {/* <button onClick={handleLogin} className='btn btn-info'>
-        login
-      </button> */}
+      <p>
+        Do not have account? <Link to={'/auth/register'}>regiter here</Link>
+      </p>
     </div>
   );
 }
