@@ -7,6 +7,10 @@
 3. UserTrips puslapyje panaudoti ta id ir parsisiusti keliones kurias sukure vartotojas
 4. TripsPage atvaizduoti keliones kitokiu stilium jei tai prisijungusio vartotojo keliones
 
+## Single Trip Page
+
+1. graziai atvaizduoti visa puslapi su stilium ir responsive bei keturiomis nuotraukomis pvz ![](assets/2024-03-21-12-18-10.png)
+
 ## back-end
 
 1. Sukurti route GET /trips/user/id/1 ir gauti visas keliones kurias sukure vartotojas
