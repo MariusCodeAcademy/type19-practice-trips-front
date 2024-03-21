@@ -1,16 +1,22 @@
 import React from 'react';
-import InputEl from '../UI/InputEl';
+// import InputEl from '../UI/InputEl';
 import { useFormik } from 'formik';
 import { object, string, ref } from 'yup';
+import axios from 'axios';
+import { beBaseUrl } from '../../config';
+import { useAuthCtx } from '../../store/AuthProvider';
+
+import { InputEl } from '../UI/InputEl';
 
 type RegisterUserObjType = {
   name?: string;
   email: string;
   password: string;
-  passwordConfirm?: string;
+  passwordConfirm: string;
 };
 
 export default function Register() {
+  const { login } = useAuthCtx();
   const formik = useFormik<RegisterUserObjType>({
     initialValues: {
       name: '',
@@ -28,13 +34,26 @@ export default function Register() {
     }),
     onSubmit: (values) => {
       // console.log(values);
-      const finalObjToBack = {
-        ...values,
-      };
-      delete finalObjToBack.passwordConfirm;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { passwordConfirm, ...finalObjToBack } = values;
+      // delete finalObjToBack.passwordConfirm;
       console.log('finalObjToBack ===', finalObjToBack);
+      sendRegisterDataToBack(finalObjToBack);
     },
   });
+
+  function sendRegisterDataToBack(data: Omit<RegisterUserObjType, 'passwordConfirm'>) {
+    axios
+      .post(`${beBaseUrl}/auth/register`, data)
+      .then((res) => {
+        console.log('res.data ===', res.data);
+        login(data.email);
+      })
+      .catch((err) => {
+        console.log('err ===', err);
+      });
+  }
+
   return (
     <div>
       <div className='container min-vh-100 mt-5'>
