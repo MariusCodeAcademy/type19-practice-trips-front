@@ -63,6 +63,7 @@ export default function Header() {
             <li>
               <NavItem to='/countries'>Countries</NavItem>
             </li>
+            <li>test user email i headeri kai prisijunges</li>
             {isUserLoggedIn && (
               <>
                 <li>
