@@ -77,7 +77,8 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
-.imgGrid > img {
+.imgGrid > img,
+.slideThumb {
   height: 200px;
   width: 100%;
   object-fit: cover;
@@ -88,12 +89,22 @@
   object-fit: cover;
 }
 
+.swiperThumbs .swiper-slide {
+  opacity: 0.4;
+}
+.swiperThumbs .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
 /* bootrstrap md media */
 @media screen and (max-width: 992px) {
   .singleTripPage {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 24px;
+  }
+  .singleTripPage .left {
+    width: 730px;
   }
   .mobileMenu {
     position: fixed;
@@ -109,6 +120,16 @@
   .submenu {
     position: static;
     transform: translateY(0);
+  }
+}
+@media screen and (max-width: 768px) {
+  .singleTripPage .left {
+    width: 500px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .singleTripPage .left {
+    width: 300px;
   }
 }
 @media screen and (min-width: 1200px) {

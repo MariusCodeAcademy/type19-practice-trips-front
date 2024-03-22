@@ -56,8 +56,8 @@ export default function SingleTripPage() {
 
   return (
     <div>
-      <div className='container-lg g-0 singleTripPage'>
-        <div className='left'>
+      <div className='container singleTripPage'>
+        <div className='left '>
           <SinglePageSwiper
             images={[
               currentTrip?.image_main || '',
@@ -66,28 +66,6 @@ export default function SingleTripPage() {
               currentTrip?.images_3 || '',
             ]}
           />
-          {/* <img
-            className='img-fluid'
-            src={'/img/' + currentTrip?.image_main}
-            alt={currentTrip?.name}
-          /> */}
-          {/* <div className='imgGrid'>
-            <img
-              className='img-fluid'
-              src={'/img/' + currentTrip?.images_1}
-              alt={currentTrip?.name}
-            />
-            <img
-              className='img-fluid'
-              src={'/img/' + currentTrip?.images_2}
-              alt={currentTrip?.name}
-            />
-            <img
-              className='img-fluid'
-              src={'/img/' + currentTrip?.images_3}
-              alt={currentTrip?.name}
-            />
-          </div> */}
         </div>
         <div className='right'>
           <h1 className='display-2'>{currentTrip?.name}</h1>
