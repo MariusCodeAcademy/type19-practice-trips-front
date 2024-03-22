@@ -28,7 +28,7 @@ export default function SingleTripPage() {
   async function getTrip(url: string) {
     try {
       const resp = await axios.get(url);
-      console.log('resp ===', resp);
+      console.log(resp.data);
       setCurrentTrip(resp.data);
     } catch (error) {
       console.warn('getTrip', error);
@@ -54,7 +54,7 @@ export default function SingleTripPage() {
 
   return (
     <div>
-      <div className='container'>
+      <div className='container singleTripPage'>
         <div className='left'>
           <img
             className='img-fluid'

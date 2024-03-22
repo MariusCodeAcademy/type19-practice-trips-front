@@ -63,8 +63,16 @@
   gap: 24px;
 }
 
+/* singleTripPage */
+
+.singleTripPage {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 24px;
+}
+
 /* bootrstrap md media */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .mobileMenu {
     position: fixed;
     background: tomato;

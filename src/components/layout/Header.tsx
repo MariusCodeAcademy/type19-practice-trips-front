@@ -39,8 +39,8 @@ export default function Header() {
         </Link>
         <nav
           onClick={closeMenu}
-          className={`${isMenuOpen ? 'on ' : ''} mobileMenu d-md-block bg-dark `}>
-          <ul className='unlisted d-flex flex-column flex-md-row  align-md-items-center'>
+          className={`${isMenuOpen ? 'on ' : ''} mobileMenu d-lg-block bg-dark `}>
+          <ul className='unlisted d-flex flex-column flex-lg-row  align-lg-items-center'>
             <li>
               <NavItem to='/'>Home</NavItem>
             </li>
@@ -89,7 +89,7 @@ export default function Header() {
             )}
           </ul>
         </nav>
-        <div className='d-md-none'>
+        <div className='d-lg-none'>
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='btn text-white'>
             <i className={`bi bi-${isMenuOpen ? 'x-square' : 'list'} fs-3`}></i>
           </button>
