@@ -1,11 +1,11 @@
 //
 
 export default function UserTrips() {
+  // gauti userId is kontekxto ir parsiusti trips priklausancius tam id
   // Parsiusti ir atvaizduoti visas prisijungusio userio keliones
 
   // kreiptis i back
-  // GET - /trips/user/1 - 1 yra userId. sis routas is backe parsiuncia userio keliones
-  // GET - /trips/user/james@bond.com - james@bond.com yra user email. sis routas is backe parsiuncia userio keliones
+  // GET - /trips/user/id/23 - 23 yra userId. sis routas is backe parsiuncia userio keliones
 
   return (
     <div>

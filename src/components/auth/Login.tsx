@@ -1,5 +1,5 @@
-import axios from 'axios';
-import React from 'react';
+import axios, { AxiosResponse } from 'axios';
+
 import { beBaseUrl } from '../../config';
 import { useAuthCtx } from '../../store/AuthProvider';
 import { InputEl } from '../UI/InputEl';
@@ -28,9 +28,9 @@ export default function Login() {
   function handleLogin(loginObj: LoginObjType) {
     axios
       .post(`${beBaseUrl}/auth/login`, loginObj)
-      .then((res) => {
+      .then((res: AxiosResponse<UserObjType>) => {
         console.log('res.data ===', res.data);
-        login(res.data.email);
+        login(res.data.email, res.data.id || 0);
       })
       .catch((err) => {
         console.log('err ===', err);

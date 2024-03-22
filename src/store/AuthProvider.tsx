@@ -3,10 +3,11 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 const AuthContext = createContext({
-  login: (email: string) => {},
+  login: (email: string, userId: number) => {},
   logout: () => {},
   isUserLoggedIn: false,
   email: '',
+  userId: 0,
 });
 
 // const valueCtx = {
@@ -22,15 +23,18 @@ type AuthProviderProps = {
 
 // sukurti AuthProvider
 export default function AuthProvider({ children }: AuthProviderProps) {
-  const [email, setEmail] = useState('james@bond.com');
+  const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState(0);
 
   // const isUserLoggedIn = !!email;
   const isUserLoggedIn = Boolean(email);
 
   console.log('email Provide ctx ===', email);
+  console.log('userId ===', userId);
 
-  function login(email: string) {
+  function login(email: string, id: number) {
     setEmail(email);
+    setUserId(id);
   }
 
   function logout() {
@@ -42,6 +46,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     logout: logout,
     isUserLoggedIn: isUserLoggedIn,
     email: email,
+    userId,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

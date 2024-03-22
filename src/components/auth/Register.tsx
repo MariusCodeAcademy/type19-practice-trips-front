@@ -2,12 +2,13 @@ import React from 'react';
 // import InputEl from '../UI/InputEl';
 import { useFormik } from 'formik';
 import { object, string, ref } from 'yup';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { beBaseUrl } from '../../config';
 import { useAuthCtx } from '../../store/AuthProvider';
 
 import { InputEl } from '../UI/InputEl';
 import { Link } from 'react-router-dom';
+import { UserObjType } from '../../types/types';
 
 type RegisterUserObjType = {
   name?: string;
@@ -46,9 +47,9 @@ export default function Register() {
   function sendRegisterDataToBack(data: Omit<RegisterUserObjType, 'passwordConfirm'>) {
     axios
       .post(`${beBaseUrl}/auth/register`, data)
-      .then((res) => {
+      .then((res: AxiosResponse<UserObjType>) => {
         console.log('res.data ===', res.data);
-        login(data.email);
+        login(data.email, res.data.id || 0);
       })
       .catch((err) => {
         console.log('err ===', err.response.data);
