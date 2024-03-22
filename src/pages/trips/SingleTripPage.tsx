@@ -54,13 +54,14 @@ export default function SingleTripPage() {
 
   return (
     <div>
-      <div className='container singleTripPage'>
+      <div className='container-lg g-0 singleTripPage'>
         <div className='left'>
           <img
             className='img-fluid'
             src={'/img/' + currentTrip?.image_main}
             alt={currentTrip?.name}
           />
+          <p>kiti 3 paveiksleliai</p>
         </div>
         <div className='right'>
           <h1 className='display-2'>{currentTrip?.name}</h1>

@@ -67,12 +67,17 @@
 
 .singleTripPage {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
 /* bootrstrap md media */
 @media screen and (max-width: 992px) {
+  .singleTripPage {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 24px;
+  }
   .mobileMenu {
     position: fixed;
     background: tomato;
