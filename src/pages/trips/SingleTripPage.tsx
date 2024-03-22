@@ -7,6 +7,8 @@ import { beBaseUrl } from '../../config';
 import axios from 'axios';
 import { getNiceDate } from '../../utils/helpers';
 import toast from 'react-hot-toast';
+import SwiperTest from '../../components/UI/SwiperTest';
+import SinglePageSwiper from '../../components/UI/SinglePageSwiper';
 
 type tripParam = {
   readonly tripId: string;
@@ -56,12 +58,20 @@ export default function SingleTripPage() {
     <div>
       <div className='container-lg g-0 singleTripPage'>
         <div className='left'>
-          <img
+          <SinglePageSwiper
+            images={[
+              currentTrip?.image_main || '',
+              currentTrip?.images_1 || '',
+              currentTrip?.images_2 || '',
+              currentTrip?.images_3 || '',
+            ]}
+          />
+          {/* <img
             className='img-fluid'
             src={'/img/' + currentTrip?.image_main}
             alt={currentTrip?.name}
-          />
-          <div className='imgGrid'>
+          /> */}
+          {/* <div className='imgGrid'>
             <img
               className='img-fluid'
               src={'/img/' + currentTrip?.images_1}
@@ -77,7 +87,7 @@ export default function SingleTripPage() {
               src={'/img/' + currentTrip?.images_3}
               alt={currentTrip?.name}
             />
-          </div>
+          </div> */}
         </div>
         <div className='right'>
           <h1 className='display-2'>{currentTrip?.name}</h1>
