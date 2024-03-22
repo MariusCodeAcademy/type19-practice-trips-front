@@ -23,8 +23,10 @@ type AuthProviderProps = {
 
 // sukurti AuthProvider
 export default function AuthProvider({ children }: AuthProviderProps) {
-  const [email, setEmail] = useState('');
-  const [userId, setUserId] = useState(0);
+  const emailFromLocalStore = localStorage.getItem('tripEmail');
+  const idFromLocalStore = localStorage.getItem('tripId');
+  const [email, setEmail] = useState(emailFromLocalStore || '');
+  const [userId, setUserId] = useState<number>(idFromLocalStore ? +idFromLocalStore : 0);
 
   // const isUserLoggedIn = !!email;
   const isUserLoggedIn = Boolean(email);
@@ -35,10 +37,14 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   function login(email: string, id: number) {
     setEmail(email);
     setUserId(id);
+    localStorage.setItem('tripEmail', email);
+    localStorage.setItem('tripId', id.toString());
   }
 
   function logout() {
     setEmail('');
+    localStorage.removeItem('tripEmail');
+    localStorage.removeItem('tripId');
   }
 
   const value = {
