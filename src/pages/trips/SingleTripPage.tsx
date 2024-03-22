@@ -61,7 +61,23 @@ export default function SingleTripPage() {
             src={'/img/' + currentTrip?.image_main}
             alt={currentTrip?.name}
           />
-          <p>kiti 3 paveiksleliai</p>
+          <div className='imgGrid'>
+            <img
+              className='img-fluid'
+              src={'/img/' + currentTrip?.images_1}
+              alt={currentTrip?.name}
+            />
+            <img
+              className='img-fluid'
+              src={'/img/' + currentTrip?.images_2}
+              alt={currentTrip?.name}
+            />
+            <img
+              className='img-fluid'
+              src={'/img/' + currentTrip?.images_3}
+              alt={currentTrip?.name}
+            />
+          </div>
         </div>
         <div className='right'>
           <h1 className='display-2'>{currentTrip?.name}</h1>
