@@ -27,7 +27,7 @@ export default function TripCard({ item }: TripCardProps) {
         <Rating rating={item.rating} />
         <p className=''>{item.price} eur</p>
         <Link to={`/trips/${item.id}`}>
-          <Button secondary>Read more</Button>
+          <Button outline>Read more</Button>
           {/* <button className='btn btn-info'>Read more</button> */}
         </Link>
       </div>
