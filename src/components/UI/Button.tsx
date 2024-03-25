@@ -31,5 +31,15 @@ export default function Button({ children, info, outline, secondary }: ButtonPro
     primary: !secondary && !info && !outline,
   });
   // su classnames
-  return <button className={`btn btn-${classNamesClass}`}>{children}</button>;
+  return (
+    <button
+      className={cl('btn', {
+        'btn-secondary': secondary,
+        'btn-info': info,
+        'btn-outline-primary': outline,
+        'btn-primary': !secondary && !info && !outline,
+      })}>
+      {children}
+    </button>
+  );
 }
