@@ -1,14 +1,15 @@
 //
 
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { TripObjType } from '../../types/types';
 import { beBaseUrl } from '../../config';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { getNiceDate } from '../../utils/helpers';
 import toast from 'react-hot-toast';
 import SwiperTest from '../../components/UI/SwiperTest';
 import SinglePageSwiper from '../../components/UI/SinglePageSwiper';
+import { useAuthCtx } from '../../store/AuthProvider';
 
 type tripParam = {
   readonly tripId: string;
@@ -17,7 +18,12 @@ type tripParam = {
 export default function SingleTripPage() {
   const { tripId } = useParams() as tripParam;
 
-  const [currentTrip, setCurrentTrip] = useState<TripObjType | null>(null);
+  const { email, userId } = useAuthCtx();
+
+  const [currentTrip, setCurrentTrip] = useState<(TripObjType & { email: string }) | null>(null);
+  console.log('currentTrip ===', currentTrip);
+  // const isOwner = email === currentTrip?.email;
+  const isOwner = true;
 
   // parsisiusti Trip objekta
 
@@ -44,12 +50,13 @@ export default function SingleTripPage() {
   const navigate = useNavigate();
   async function handleDeleteTrip() {
     try {
-      const resp = await axios.delete(cUrl);
+      const resp = await axios.delete(cUrl, { data: { userId } });
       console.log('resp ===', resp);
       toast.success(`${currentTrip?.name} was deleted`);
       navigate('/trips');
     } catch (error) {
-      console.warn('error ===', error);
+      const axiosErr = error as AxiosError;
+      console.log('axiosErr.response?.data ===', axiosErr.response?.data);
       console.warn('klaida trinant');
     }
   }
@@ -75,10 +82,14 @@ export default function SingleTripPage() {
           </p>
           <p className=''>{currentTrip?.description}</p>
           <div className='control d-flex gap-2'>
-            <button className='btn btn-secondary'>Go back</button>
-            <button onClick={handleDeleteTrip} className='btn btn-danger'>
-              Delete
-            </button>
+            <Link to={'/trips'}>
+              <button className='btn btn-secondary'>Go back</button>
+            </Link>
+            {isOwner && (
+              <button onClick={handleDeleteTrip} className='btn btn-danger'>
+                Delete
+              </button>
+            )}
           </div>
         </div>
       </div>
