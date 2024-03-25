@@ -1,19 +1,24 @@
 import { Link } from 'react-router-dom';
-import { TripObjType } from '../../types/types';
+import { TripObjType, UserObjType } from '../../types/types';
 import { getNiceDate } from '../../utils/helpers';
 import Rating from '../UI/Rating';
 
+import { useAuthCtx } from '../../store/AuthProvider';
+
 type TripCardProps = {
-  item: Omit<TripObjType, 'description'>;
+  item: Omit<TripObjType, 'description'> & { email: string };
 };
 
 export default function TripCard({ item }: TripCardProps) {
+  const { email } = useAuthCtx();
+
   return (
-    <div className='border p-4 rounded tripGrid'>
+    <div className={`border p-4 rounded tripGrid ${email === item.email ? 'bg-dark-subtle' : ''} `}>
       <img src={'/img/' + item.image_main} alt={item.name} className='img-fluid' />
       <div className='info'>
         <h3 className='h4'>{item.name}</h3>
         <p className='lead'>{getNiceDate(item.date)}</p>
+        <p className=''>{item.email}</p>
         <p>
           <span className='fw-bold'>{item.country}</span> - {item.city}
         </p>
