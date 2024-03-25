@@ -13,7 +13,7 @@ export default function CountriesPage() {
   }, []);
 
   function getCountries(url: string) {
-    // axios
+    // axios - parsiusti countries ir atvaizduoti korteliu pavidalu
   }
 
   return (
