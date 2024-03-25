@@ -4,6 +4,7 @@ import { getNiceDate } from '../../utils/helpers';
 import Rating from '../UI/Rating';
 import cl from 'classnames';
 import { useAuthCtx } from '../../store/AuthProvider';
+import Button from '../UI/Button';
 
 type TripCardProps = {
   item: Omit<TripObjType, 'description'> & { email: string };
@@ -26,7 +27,8 @@ export default function TripCard({ item }: TripCardProps) {
         <Rating rating={item.rating} />
         <p className=''>{item.price} eur</p>
         <Link to={`/trips/${item.id}`}>
-          <button className='btn btn-info'>Read more</button>
+          <Button secondary>Read more</Button>
+          {/* <button className='btn btn-info'>Read more</button> */}
         </Link>
       </div>
     </div>

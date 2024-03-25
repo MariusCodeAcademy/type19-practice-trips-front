@@ -6,5 +6,8 @@ type ButtonProps = {
 };
 
 export default function Button({ children, info, outline, secondary }: ButtonProps) {
-  return <button className={'btn btn-primary'}>{children}</button>;
+  // be classnames
+  const finalClass = '';
+  // su classnames
+  return <button className={`btn btn-primary`}>{children}</button>;
 }
