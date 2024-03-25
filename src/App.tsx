@@ -13,6 +13,7 @@ import Register from './components/auth/Register';
 import { useAuthCtx } from './store/AuthProvider';
 import UserPage from './pages/UserPage';
 import UserTrips from './pages/UserTrips';
+import CountriesPage from './pages/countries/CountriesPage';
 
 export default function App() {
   const { isUserLoggedIn } = useAuthCtx();
@@ -22,6 +23,7 @@ export default function App() {
       <Toaster />
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/countries' element={<CountriesPage />} />
         {/* <Route path='/auth' element={<AuthPage />} /> */}
         <Route
           path='/auth/login'
