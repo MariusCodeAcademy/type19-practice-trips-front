@@ -9,3 +9,7 @@
 
 1. Prideti front end paieskos lauka pagal keliones pavadinima
 2. prideti filtravima pagal keliones kaina nuo maziausios iki didziausios, ar bent viena is ju.
+
+## Back end
+
+1. pabaigti istrynimo logika (delete trip)
