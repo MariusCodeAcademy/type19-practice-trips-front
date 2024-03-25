@@ -1,4 +1,5 @@
 import { FormikProps } from 'formik';
+import cl from 'classnames';
 
 type InputElProps<T> = {
   placeholder: string;
@@ -20,7 +21,7 @@ export function InputEl<T>({ formik, id, placeholder, className, type = 'text' }
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         // isInvalid tik kai kalaida ir blur
-        className={`form-control ${isError ? 'is-invalid' : ''}`}
+        className={cl('form-control', { 'is-invalid': isError })}
         type={type}
         id={id.toString()}
         placeholder={placeholder}

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuthCtx } from '../../store/AuthProvider';
+import cl from 'classnames';
 
 type NavItemProps = {
   to: string;
@@ -39,7 +40,8 @@ export default function Header() {
         </Link>
         <nav
           onClick={closeMenu}
-          className={`${isMenuOpen ? 'on ' : ''} mobileMenu d-lg-block bg-dark `}>
+          // className={`${isMenuOpen ? 'on ' : ''} mobileMenu d-lg-block bg-dark `}>
+          className={cl('mobileMenu d-lg-block bg-dark', { on: isMenuOpen })}>
           <ul className='unlisted d-flex flex-column flex-lg-row  align-lg-items-center'>
             <li>
               <NavItem to='/'>Home</NavItem>
