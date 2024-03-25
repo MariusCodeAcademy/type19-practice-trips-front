@@ -1,3 +1,5 @@
+import cl from 'classnames';
+
 type ButtonProps = {
   secondary?: boolean;
   info?: boolean;
@@ -22,6 +24,12 @@ export default function Button({ children, info, outline, secondary }: ButtonPro
     default:
       finalSwithClass = 'primary';
   }
+  const classNamesClass = cl({
+    secondary: secondary,
+    info: info,
+    'outline-primary': outline,
+    primary: !secondary && !info && !outline,
+  });
   // su classnames
-  return <button className={`btn btn-${finalSwithClass}`}>{children}</button>;
+  return <button className={`btn btn-${classNamesClass}`}>{children}</button>;
 }
