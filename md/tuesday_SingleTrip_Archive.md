@@ -11,3 +11,7 @@
 ## Archive page
 
 1. kiek kelioniu yra i ta sali ![](assets/2024-03-26-12-01-36.png)
+
+## Trips page
+
+1. Prideti fron end paieskos filtra pagal pavadinima ![](assets/2024-03-26-12-08-52.png)
