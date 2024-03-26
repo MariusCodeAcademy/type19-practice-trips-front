@@ -11,7 +11,7 @@ export const CounterContext = createContext({
 export default function UserPage() {
   const initVal = 10;
   function sayHi() {
-    console.log('hello');
+    // console.log('hello');
   }
   const counterCtxVal = { val: initVal, sayHi };
 

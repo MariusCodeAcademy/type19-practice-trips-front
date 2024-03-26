@@ -12,7 +12,7 @@ export default function TripsPage() {
   const [tripsArr, setTripsArr] = useState<(TripObjType & { email: string })[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState<string>('');
-  console.log('tripsArr ===', tripsArr);
+  // console.log('tripsArr ===', tripsArr);
 
   const [filterVal, setFilterVal] = useState('');
   // '/filter?country=france'

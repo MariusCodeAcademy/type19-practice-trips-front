@@ -59,7 +59,7 @@ export default function AddTripPage() {
     axios
       .post(`${beBaseUrl}/trips`, data)
       .then((resp) => {
-        console.log('resp ===', resp);
+        // console.log('resp ===', resp);
         // jei sekme tai naviguojam i trips
         if (resp.status === 200) {
           // naviguoti
@@ -72,7 +72,7 @@ export default function AddTripPage() {
       .catch((error) => {
         const axiosErr = error as AxiosError;
         console.warn('sendDataToBe ivyko klaida:');
-        console.log(JSON.stringify(axiosErr.response?.data, null, 2));
+        console.warn(JSON.stringify(axiosErr.response?.data, null, 2));
         toast.error('Somening went wrong');
         // jei nesekme tai rodom klaidas arba klaida
         if (axiosErr.response?.data) {

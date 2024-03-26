@@ -21,7 +21,7 @@ export default function SingleTripPage() {
   const { email, userId } = useAuthCtx();
 
   const [currentTrip, setCurrentTrip] = useState<(TripObjType & { email: string }) | null>(null);
-  console.log('currentTrip ===', currentTrip);
+  // console.log('currentTrip ===', currentTrip);
   // const isOwner = email === currentTrip?.email;
   const isOwner = true;
 
@@ -29,14 +29,14 @@ export default function SingleTripPage() {
 
   const cUrl = `${beBaseUrl}/trips/${tripId}`;
   useEffect(() => {
-    console.log('cUrl ===', cUrl);
+    // console.log('cUrl ===', cUrl);
     getTrip(cUrl);
   }, [cUrl]);
 
   async function getTrip(url: string) {
     try {
       const resp = await axios.get(url);
-      console.log(resp.data);
+      // console.log(resp.data);
       setCurrentTrip(resp.data);
     } catch (error) {
       console.warn('getTrip', error);
@@ -51,12 +51,12 @@ export default function SingleTripPage() {
   async function handleDeleteTrip() {
     try {
       const resp = await axios.delete(cUrl, { data: { userId } });
-      console.log('resp ===', resp);
+      // console.log('resp ===', resp);
       toast.success(`${currentTrip?.name} was deleted`);
       navigate('/trips');
     } catch (error) {
       const axiosErr = error as AxiosError;
-      console.log('axiosErr.response?.data ===', axiosErr.response?.data);
+      console.warn('axiosErr.response?.data ===', axiosErr.response?.data);
       console.warn('klaida trinant');
     }
   }

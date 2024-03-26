@@ -39,7 +39,7 @@ export default function Register() {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { passwordConfirm, ...finalObjToBack } = values;
       // delete finalObjToBack.passwordConfirm;
-      console.log('finalObjToBack ===', finalObjToBack);
+      // console.log('finalObjToBack ===', finalObjToBack);
       sendRegisterDataToBack(finalObjToBack);
     },
   });
@@ -48,7 +48,7 @@ export default function Register() {
     axios
       .post(`${beBaseUrl}/auth/register`, data)
       .then((res: AxiosResponse<UserObjType>) => {
-        console.log('res.data ===', res.data);
+        // console.log('res.data ===', res.data);
         login(data.email, res.data.id || 0);
       })
       .catch((err) => {

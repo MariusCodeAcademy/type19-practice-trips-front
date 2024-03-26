@@ -31,8 +31,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   // const isUserLoggedIn = !!email;
   const isUserLoggedIn = Boolean(email);
 
-  console.log('email Provide ctx ===', email);
-  console.log('userId ===', userId);
+  // console.log('email Provide ctx ===', email);
+  // console.log('userId ===', userId);
 
   function login(email: string, id: number) {
     setEmail(email);

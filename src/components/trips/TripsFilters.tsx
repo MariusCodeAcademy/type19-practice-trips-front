@@ -13,21 +13,16 @@ export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
   const [starsSelected, setStarsSelected] = useState(0);
 
   useEffect(() => {
-    console.log('pasikeite');
-    console.log('countySelVal ===', countySelVal);
-    console.log('citySelValue ===', citySelValue);
     let finalFilterString = `/filter?`;
     if (countySelVal !== 'all') finalFilterString += `country=${countySelVal}`;
     if (citySelValue !== 'all') finalFilterString += `&city=${citySelValue}`;
     if (starsSelected !== 0) finalFilterString += `&rating=${starsSelected}`;
-    console.log('finalFilterString ===', finalFilterString);
+    // console.log('finalFilterString ===', finalFilterString);
     onFilterChange(finalFilterString);
   }, [countySelVal, citySelValue, starsSelected]);
 
   const [countriesArr, setCountriesArr] = useState<{ country: string }[]>([]);
   const [citiesArr, setCitiesArr] = useState<{ city: string }[]>([]);
-  // console.log('countriesArr ===', countriesArr);
-  console.log('citiesArr ===', citiesArr);
   useEffect(() => {
     // get countries
     getCountries();

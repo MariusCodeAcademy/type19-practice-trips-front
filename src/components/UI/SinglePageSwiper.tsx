@@ -34,7 +34,9 @@ export default function SinglePageSwiper({ images }: SinglePageSwiperProps) {
           pauseOnMouseEnter: true,
         }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-        onSlideChange={() => console.log('slide change')}
+        onSlideChange={() => {
+          console.log('slide change');
+        }}
         onSwiper={(swiper) => console.log(swiper)}
         className='swiperUp mb-2 '>
         {images

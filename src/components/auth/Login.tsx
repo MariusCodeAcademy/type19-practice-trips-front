@@ -18,22 +18,22 @@ export default function Login() {
       password: '',
     },
     onSubmit: (values) => {
-      console.log('values ===', JSON.stringify(values, null, 2));
+      // console.log('values ===', JSON.stringify(values, null, 2));
       handleLogin(values);
     },
   });
 
-  console.log('formik.values ===', formik.values);
+  // console.log('formik.values ===', formik.values);
 
   function handleLogin(loginObj: LoginObjType) {
     axios
       .post(`${beBaseUrl}/auth/login`, loginObj)
       .then((res: AxiosResponse<UserObjType>) => {
-        console.log('res.data ===', res.data);
+        // console.log('res.data ===', res.data);
         login(res.data.email, res.data.id || 0);
       })
       .catch((err) => {
-        console.log('err ===', err);
+        console.warn('err ===', err);
       });
   }
   return (

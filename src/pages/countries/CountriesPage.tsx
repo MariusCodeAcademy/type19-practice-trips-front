@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 export default function CountriesPage() {
   //
   const [countriesArr, setCountriesArr] = useState<CountryObjType[] | null>(null);
-  console.log('countriesArr ===', countriesArr);
   useEffect(() => {
     getCountries(countriesUrl);
   }, []);
@@ -19,7 +18,7 @@ export default function CountriesPage() {
     axios
       .get(url)
       .then((resp: AxiosResponse) => {
-        console.log('resp.data ===', resp.data);
+        // console.log('resp.data ===', resp.data);
         setCountriesArr(resp.data);
       })
       .catch((error: AxiosError) => {
