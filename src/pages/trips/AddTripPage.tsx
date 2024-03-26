@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import { InputEl } from '../../components/UI/InputEl';
+import { useAuthCtx } from '../../store/AuthProvider';
 
 const initFormValues: TripObjTypeNoId = {
   name: 'Trip to Jamaika',
@@ -23,9 +24,10 @@ const initFormValues: TripObjTypeNoId = {
 };
 
 export default function AddTripPage() {
+  const { userId } = useAuthCtx();
   // add formik
   const formik = useFormik<TripObjTypeNoId>({
-    initialValues: { ...initFormValues },
+    initialValues: { ...initFormValues, user_id: userId },
     validationSchema: Yup.object({
       name: Yup.string().min(3).max(255).required(),
       date: Yup.date().min('2024-03-18').required(),
@@ -84,7 +86,7 @@ export default function AddTripPage() {
   // type FormikType = typeof formik
   // initial values formik
 
-  // console.log('formik klaidos ===', formik.errors);
+  // console.log(' formik.initialValues ===', formik.initialValues);
 
   // sukurti likusius  InputEl
   return (
@@ -107,6 +109,7 @@ export default function AddTripPage() {
           />
           <InputEl formik={formik} id='rating' placeholder='Enter rating' type='number' />
           <InputEl formik={formik} id='price' placeholder='Enter price' type='number' />
+          <InputEl formik={formik} disabled id='user_id' placeholder='Your id' type='number' />
           <InputEl formik={formik} id='image_main' placeholder='Enter main image' type='text' />
           <InputEl formik={formik} id='images_1' placeholder='Enter image 1' type='text' />
           <InputEl formik={formik} id='images_2' placeholder='Enter image 2' type='text' />

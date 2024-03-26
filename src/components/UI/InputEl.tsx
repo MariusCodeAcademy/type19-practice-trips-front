@@ -7,9 +7,17 @@ type InputElProps<T> = {
   readonly id: keyof T;
   formik: FormikProps<T>;
   className?: string;
+  disabled?: boolean;
 };
 
-export function InputEl<T>({ formik, id, placeholder, className, type = 'text' }: InputElProps<T>) {
+export function InputEl<T>({
+  disabled,
+  formik,
+  id,
+  placeholder,
+  className,
+  type = 'text',
+}: InputElProps<T>) {
   const Element = type === 'textarea' ? 'textarea' : 'input';
 
   const isError = formik.errors[id] && formik.touched[id];
@@ -25,6 +33,7 @@ export function InputEl<T>({ formik, id, placeholder, className, type = 'text' }
         type={type}
         id={id.toString()}
         placeholder={placeholder}
+        disabled={disabled}
       />
       {isError && (
         <span className='bg-danger-subtle rounded-1 d-block text-danger px-3 py-1 '>

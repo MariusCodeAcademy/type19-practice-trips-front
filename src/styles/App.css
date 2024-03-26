@@ -113,6 +113,11 @@
   z-index: 1;
   position: relative;
 }
+.cSingleImage {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
 
 /* bootrstrap md media */
 @media screen and (max-width: 992px) {

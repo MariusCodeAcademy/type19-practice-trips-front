@@ -12,3 +12,7 @@ a {
   padding-left: 0;
   margin-bottom: 0;
 }
+
+.max-h-400 {
+  max-height: 400px;
+}
