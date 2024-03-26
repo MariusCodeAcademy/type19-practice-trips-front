@@ -35,9 +35,9 @@ export default function CountriesPage() {
         <ul className='unlisted row'>
           {countriesArr?.map((cObj) => (
             <li className='col-12 col-md-6 col-xl-4' key={cObj.id}>
-              <Link to={'#'}>
+              <Link className='d-block' to={'#'}>
                 <img className='cImg' src={'/img/' + cObj.image_main} alt={cObj.name} />
-                <h3 className=''>{cObj.name}</h3>
+                <h3 className='cName'>{cObj.name}</h3>
               </Link>
             </li>
           ))}
