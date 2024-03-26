@@ -55,6 +55,11 @@ export default function Header() {
                   </NavItem>
                 </li>
                 <li>
+                  <NavItem subItem to='/trips/archive'>
+                    Trip archive
+                  </NavItem>
+                </li>
+                <li>
                   <NavItem subItem to='/user/user-trips'>
                     My Trips
                   </NavItem>
