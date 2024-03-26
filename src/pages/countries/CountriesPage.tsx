@@ -13,6 +13,8 @@ export default function CountriesPage() {
     getCountries(countriesUrl);
   }, []);
 
+  console.log('countriesArr ===', countriesArr);
+
   function getCountries(url: string) {
     // axios - parsiusti countries ir atvaizduoti korteliu pavidalu
     axios

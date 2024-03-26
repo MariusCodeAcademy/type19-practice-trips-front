@@ -12,7 +12,7 @@ export default function TripsList({ list, archive }: TripsListProps) {
     <ul className='unlisted tripsList'>
       {list?.map((tObj) => (
         <li className='mb-4' key={tObj.id}>
-          <TripCard item={tObj} archive />
+          <TripCard item={tObj} archive={archive} />
         </li>
       ))}
     </ul>

@@ -7,6 +7,7 @@ import { TripObjType } from '../../types/types';
 import toast from 'react-hot-toast';
 import TripCard from '../../components/trips/TripCard';
 import { TripsFilters } from '../../components/trips/TripsFilters';
+import TripsList from '../../components/trips/TripsList';
 
 export default function TripsPage() {
   const [tripsArr, setTripsArr] = useState<(TripObjType & { email: string })[] | null>(null);
@@ -60,13 +61,14 @@ export default function TripsPage() {
           <TripsFilters onFilterChange={setFilterVal} />
 
           {/* TripsList */}
-          <ul className='unlisted tripsList'>
+          <TripsList list={tripsArr} />
+          {/* <ul className='unlisted tripsList'>
             {tripsArr?.map((tObj) => (
               <li className='mb-4' key={tObj.id}>
                 <TripCard item={tObj} />
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>
