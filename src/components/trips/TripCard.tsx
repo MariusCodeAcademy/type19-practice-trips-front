@@ -8,9 +8,10 @@ import Button from '../UI/Button';
 
 type TripCardProps = {
   item: Omit<TripObjType, 'description'> & { email: string };
+  archive?: boolean;
 };
 
-export default function TripCard({ item }: TripCardProps) {
+export default function TripCard({ item, archive }: TripCardProps) {
   const { email } = useAuthCtx();
 
   return (
@@ -26,10 +27,13 @@ export default function TripCard({ item }: TripCardProps) {
         </p>
         <Rating rating={item.rating} />
         <p className=''>{item.price} eur</p>
-        <Link to={`/trips/${item.id}`}>
-          <Button outline>Read more</Button>
-          {/* <button className='btn btn-info'>Read more</button> */}
-        </Link>
+        {!archive && (
+          <Link to={`/trips/${item.id}`}>
+            <Button outline>Read more</Button>
+            {/* <button className='btn btn-info'>Read more</button> */}
+          </Link>
+        )}
+        {archive && <Button secondary>Deleted, Undelete?</Button>}
       </div>
     </div>
   );

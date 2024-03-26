@@ -59,6 +59,7 @@ export default function TripsPage() {
         <div className='tripsPageGrid'>
           <TripsFilters onFilterChange={setFilterVal} />
 
+          {/* TripsList */}
           <ul className='unlisted tripsList'>
             {tripsArr?.map((tObj) => (
               <li className='mb-4' key={tObj.id}>
