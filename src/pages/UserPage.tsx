@@ -1,37 +1,27 @@
 //
 
-import { createContext } from 'react';
-import CounterList from '../components/counter/CounterList';
-
-export const CounterContext = createContext({
-  val: 0,
-  sayHi: () => {},
-});
+import Button from '../components/UI/Button';
 
 export default function UserPage() {
-  const initVal = 10;
-  function sayHi() {
-    // console.log('hello');
-  }
-  const counterCtxVal = { val: initVal, sayHi };
-
   return (
     <div>
       <div className='container'>
-        <h1 className='display-2'>UserPage</h1>
+        <h1 className='display-4'>UserPage</h1>
         <p>Welcome to Your homepage UserPage</p>
 
-        <p className='h3'>Username: ''</p>
-        <input className='form-control' type='text' />
-        <p className='h3'>Created At: ''</p>
+        <hr />
+        <div className='input-group mb-3'>
+          <input type='text' className='form-control' placeholder='Username' />
+          <button className='btn btn-outline-secondary' type='button' id='button-addon2'>
+            Update
+          </button>
+        </div>
 
-        <button className='btn btn-outline-info'>change password</button>
-        <button className='btn btn-outline-info'>update Username</button>
+        <p className='h4 fw-normal'>Created At: ''</p>
+
+        <Button>Update username</Button>
 
         <hr />
-        <CounterContext.Provider value={counterCtxVal}>
-          <CounterList />
-        </CounterContext.Provider>
       </div>
     </div>
   );
