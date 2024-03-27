@@ -1,25 +1,60 @@
 //
 
+import { useEffect, useState } from 'react';
 import Button from '../components/UI/Button';
+import { useAuthCtx } from '../store/AuthProvider';
+import { usersUrl } from '../config';
+import axios, { AxiosResponse } from 'axios';
+import { UserObjType } from '../types/types';
+import { getNiceDate } from '../utils/helpers';
 
 export default function UserPage() {
+  const { email, userId } = useAuthCtx();
+  const [userFromBackObj, setUserFromBackObj] = useState<UserObjType>({
+    name: '',
+    created_at: '',
+    email: '',
+    password: '',
+  });
+  const [username, setUsername] = useState(userFromBackObj.name);
+  console.log('userFromBackObj ===', userFromBackObj);
+  useEffect(() => {
+    getUser(`${usersUrl}/${userId}`);
+  }, [userId]);
+
+  function getUser(url: string) {
+    axios
+      .get(url)
+      .then((resp: AxiosResponse<UserObjType>) => {
+        // console.log('resp.data ===', resp.data);
+        setUserFromBackObj(resp.data);
+      })
+      .catch((error) => {
+        console.warn('ivyko klaida:', error);
+      });
+  }
+
   return (
     <div>
       <div className='container'>
-        <h1 className='display-4'>UserPage</h1>
+        <h1 className='display-4'>Welcome {userFromBackObj.email}</h1>
         <p>Welcome to Your homepage UserPage</p>
 
         <hr />
         <div className='input-group mb-3'>
-          <input type='text' className='form-control' placeholder='Username' />
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            type='text'
+            className='form-control'
+            placeholder='Username'
+          />
           <button className='btn btn-outline-secondary' type='button' id='button-addon2'>
             Update
           </button>
         </div>
 
-        <p className='h4 fw-normal'>Created At: ''</p>
-
-        <Button>Update username</Button>
+        <p className='h5 fw-normal'>Created At: {getNiceDate(userFromBackObj.created_at)}</p>
 
         <hr />
       </div>
