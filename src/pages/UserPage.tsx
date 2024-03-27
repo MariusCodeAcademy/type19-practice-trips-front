@@ -34,6 +34,8 @@ export default function UserPage() {
       });
   }
 
+  function updateUsername() {}
+
   return (
     <div>
       <div className='container'>
