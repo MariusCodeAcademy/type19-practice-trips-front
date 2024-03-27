@@ -9,7 +9,7 @@ import { TripsFilters } from '../../components/trips/TripsFilters';
 import TripsList from '../../components/trips/TripsList';
 
 export default function TripsPage() {
-  const [tripsArr, setTripsArr] = useState<(TripObjType & { email: string })[] | null>(null);
+  const [tripsArr, setTripsArr] = useState<(TripObjType & { email: string })[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState<string>('');
   // console.log('tripsArr ===', tripsArr);
@@ -90,6 +90,7 @@ export default function TripsPage() {
               <option value={'country-a-z'}>Country a-z</option>
               <option value={'dalykas'}>Country z-a</option>
               <option value={'date-min-to-max'}>Date min-max</option>
+              <option value={'date-min-to-max'}>Date max-min</option>
             </select>
             <TripsList list={sortedArr} />
           </div>
