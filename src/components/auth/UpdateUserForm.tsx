@@ -2,10 +2,11 @@
 import { useFormik } from 'formik';
 import { object, string, ref } from 'yup';
 import axios, { AxiosResponse } from 'axios';
-import { beBaseUrl } from '../../config';
+import { beBaseUrl, usersUrl } from '../../config';
 import { useAuthCtx } from '../../store/AuthProvider';
 import { InputEl } from '../UI/InputEl';
 import { UserObjType } from '../../types/types';
+import { useEffect } from 'react';
 
 type UpdateUserObjType = {
   name?: string;
@@ -15,12 +16,18 @@ type UpdateUserObjType = {
   passwordConfirm: string;
 };
 
-export default function UpdateUserForm() {
-  const { login } = useAuthCtx();
+type UpdateUserFormProps = {
+  email: string;
+  name: string;
+  userId: number;
+};
+
+export default function UpdateUserForm({ email, name, userId }: UpdateUserFormProps) {
+  console.log('UpdateUserForm userInfo ===', email, name);
   const formik = useFormik<UpdateUserObjType>({
     initialValues: {
-      name: '',
-      email: '',
+      name: name,
+      email: email,
       currentPassword: '',
       password: '',
       passwordConfirm: '',
@@ -40,19 +47,25 @@ export default function UpdateUserForm() {
       const { passwordConfirm, ...finalObjToBack } = values;
       // delete finalObjToBack.passwordConfirm;
       // console.log('finalObjToBack ===', finalObjToBack);
-      sendRegisterDataToBack(finalObjToBack);
+      sendUpdateDataToBack(finalObjToBack);
     },
   });
 
-  function sendRegisterDataToBack(data: Omit<UpdateUserObjType, 'passwordConfirm'>) {
+  useEffect(() => {
+    console.log('setting values');
+    formik.setFieldValue('email', email);
+    formik.setFieldValue('name', name);
+  }, [email, name]);
+
+  function sendUpdateDataToBack(data: Omit<UpdateUserObjType, 'passwordConfirm'>) {
+    console.log('data sending ===', data);
     axios
-      .post(`${beBaseUrl}/auth/register`, data)
+      .post(`${usersUrl}/update/user/${userId}`, data)
       .then((res: AxiosResponse<UserObjType>) => {
-        // console.log('res.data ===', res.data);
-        login(data.email, res.data.id || 0);
+        console.log('res.data ===', res.data);
       })
       .catch((err) => {
-        console.log('err ===', err.response.data);
+        console.warn('err sendUpdateDataToBack ===', err.response.data);
       });
   }
 

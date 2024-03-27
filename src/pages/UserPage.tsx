@@ -78,7 +78,11 @@ export default function UserPage() {
         <p className='h5 fw-normal'>Created At: {getNiceDate(userFromBackObj.created_at)}</p>
 
         <hr />
-        <UpdateUserForm userInfo={userFromBackObj} />
+        <UpdateUserForm
+          userId={userId}
+          email={userFromBackObj.email}
+          name={userFromBackObj.name || ''}
+        />
       </div>
     </div>
   );
