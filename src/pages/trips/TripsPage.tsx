@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { beBaseUrl } from '../../config';
 import { TripObjType } from '../../types/types';
 import toast from 'react-hot-toast';
-import TripCard from '../../components/trips/TripCard';
 import { TripsFilters } from '../../components/trips/TripsFilters';
 import TripsList from '../../components/trips/TripsList';
 
@@ -17,6 +16,25 @@ export default function TripsPage() {
 
   const [sortOptVal, setSortOptVal] = useState('');
 
+  let sortedArr = tripsArr !== null ? [...tripsArr] : [];
+
+  switch (sortOptVal) {
+    case 'price-min-to-max':
+      console.log('price-min-to-max sort');
+      sortedArr.sort((a, b) => a.price - b.price);
+      break;
+    case 'country-a-z':
+      console.log('price-min-to-max sort');
+      sortedArr.sort((a, b) => a.country.localeCompare(b.country));
+      break;
+    default:
+      console.log('default sort');
+      sortedArr = tripsArr;
+      break;
+  }
+
+  // const sortedArr = tripsArr?.sort((a, b) => a.price - b.price);
+  // console.table(sortedArr, ['price', 'name', 'country']);
   const [filterVal, setFilterVal] = useState('');
 
   useEffect(() => {
@@ -65,15 +83,15 @@ export default function TripsPage() {
             <select
               value={sortOptVal}
               onChange={(e) => setSortOptVal(e.target.value)}
-              className='form-select  w-25'>
+              className='form-select w-25'>
               <option value={''}>Sort By</option>
               <option value={'price-min-to-max'}>Price min to max</option>
               <option value={'dalykas'}>Price max to min</option>
-              <option value={'dalykas'}>Country a-z</option>
+              <option value={'country-a-z'}>Country a-z</option>
               <option value={'dalykas'}>Country z-a</option>
               <option value={'date-min-to-max'}>Date min-max</option>
             </select>
-            <TripsList list={tripsArr} />
+            <TripsList list={sortedArr} />
           </div>
           {/* <ul className='unlisted tripsList'>
             {tripsArr?.map((tObj) => (
