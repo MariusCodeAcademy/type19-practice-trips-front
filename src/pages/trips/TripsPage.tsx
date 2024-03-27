@@ -15,11 +15,10 @@ export default function TripsPage() {
   const [isError, setIsError] = useState<string>('');
   // console.log('tripsArr ===', tripsArr);
 
+  const [sortOptVal, setSortOptVal] = useState('');
+
   const [filterVal, setFilterVal] = useState('');
-  // '/filter?country=france'
-  // '/filter?city=paris'
-  // '/filter?rating=3'
-  // '/filter?country=france&city=paris&rating=3'
+
   useEffect(() => {
     // toast.loading('Loading...');
     if (filterVal) {
@@ -61,7 +60,21 @@ export default function TripsPage() {
           <TripsFilters onFilterChange={setFilterVal} />
 
           {/* TripsList */}
-          <TripsList list={tripsArr} />
+          <div className=''>
+            <p>active sort: {sortOptVal}</p>
+            <select
+              value={sortOptVal}
+              onChange={(e) => setSortOptVal(e.target.value)}
+              className='form-select  w-25'>
+              <option value={''}>Sort By</option>
+              <option value={'price-min-to-max'}>Price min to max</option>
+              <option value={'dalykas'}>Price max to min</option>
+              <option value={'dalykas'}>Country a-z</option>
+              <option value={'dalykas'}>Country z-a</option>
+              <option value={'date-min-to-max'}>Date min-max</option>
+            </select>
+            <TripsList list={tripsArr} />
+          </div>
           {/* <ul className='unlisted tripsList'>
             {tripsArr?.map((tObj) => (
               <li className='mb-4' key={tObj.id}>

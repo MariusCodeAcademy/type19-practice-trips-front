@@ -60,7 +60,7 @@ export default function UpdateUserForm({ email, name, userId }: UpdateUserFormPr
   function sendUpdateDataToBack(data: Omit<UpdateUserObjType, 'passwordConfirm'>) {
     console.log('data sending ===', data);
     axios
-      .post(`${usersUrl}/update/user/${userId}`, data)
+      .put(`${beBaseUrl}/auth/user/update/${userId}`, data)
       .then((res: AxiosResponse<UserObjType>) => {
         console.log('res.data ===', res.data);
       })
