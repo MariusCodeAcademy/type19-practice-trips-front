@@ -89,6 +89,12 @@ export default function TripsPage() {
               <option value={'dalykas'}>Price max to min</option>
               <option value={'country-a-z'}>Country a-z</option>
               <option value={'dalykas'}>Country z-a</option>
+              <option value={'city-a-z'}>City a-z</option>
+              <option value={'dalykas'}>City z-a</option>
+              <option value={'stars-min-to-max'}>Stars min-max</option>
+              <option value={'dalykas'}>Stars max-min</option>
+              <option value={'email-a-z'}>Email a-z</option>
+              <option value={'dalykas'}>Email z-a</option>
               <option value={'date-min-to-max'}>Date min-max</option>
               <option value={'date-min-to-max'}>Date max-min</option>
             </select>
