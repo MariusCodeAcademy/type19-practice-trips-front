@@ -11,13 +11,14 @@ import { getNiceDate } from '../utils/helpers';
 export default function UserPage() {
   const { email, userId } = useAuthCtx();
   const [userFromBackObj, setUserFromBackObj] = useState<UserObjType>({
-    name: '',
+    name: 'old val',
     created_at: '',
     email: '',
     password: '',
   });
-  const [username, setUsername] = useState(userFromBackObj.name);
+  const [username, setUsername] = useState('');
   console.log('userFromBackObj ===', userFromBackObj);
+
   useEffect(() => {
     getUser(`${usersUrl}/${userId}`);
   }, [userId]);
@@ -28,6 +29,7 @@ export default function UserPage() {
       .then((resp: AxiosResponse<UserObjType>) => {
         // console.log('resp.data ===', resp.data);
         setUserFromBackObj(resp.data);
+        setUsername(resp.data.name || '');
       })
       .catch((error) => {
         console.warn('ivyko klaida:', error);
