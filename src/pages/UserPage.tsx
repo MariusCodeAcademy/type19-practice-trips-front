@@ -8,6 +8,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { UserObjType } from '../types/types';
 import { getNiceDate } from '../utils/helpers';
 import toast from 'react-hot-toast';
+import UpdateUserForm from '../components/auth/UpdateUserForm';
 
 export default function UserPage() {
   const { email, userId } = useAuthCtx();
@@ -77,6 +78,7 @@ export default function UserPage() {
         <p className='h5 fw-normal'>Created At: {getNiceDate(userFromBackObj.created_at)}</p>
 
         <hr />
+        <UpdateUserForm userInfo={userFromBackObj} />
       </div>
     </div>
   );
