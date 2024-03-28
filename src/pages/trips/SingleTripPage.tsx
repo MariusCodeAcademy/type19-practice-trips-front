@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 import SwiperTest from '../../components/UI/SwiperTest';
 import SinglePageSwiper from '../../components/UI/SinglePageSwiper';
 import { useAuthCtx } from '../../store/AuthProvider';
+import BIcon from '../../components/UI/BIcon';
 
 type tripParam = {
   readonly tripId: string;
@@ -61,6 +62,25 @@ export default function SingleTripPage() {
     }
   }
 
+  function handleLike() {
+    if (!currentTrip) return;
+    // nusiusti objekta i back
+    const newLike: { trip_id: number; user_id: number } = {
+      trip_id: currentTrip.id,
+      user_id: userId,
+    };
+
+    // console.log('newLike ===', newLike);
+    axios
+      .post(`${beBaseUrl}/likes`, newLike)
+      .then((resp) => {
+        console.log('resp ===', resp.data);
+      })
+      .catch((error) => {
+        console.warn('newLike ivyko klaida:', error);
+      });
+  }
+
   return (
     <div>
       <div className='container singleTripPage'>
@@ -90,6 +110,9 @@ export default function SingleTripPage() {
                 Delete
               </button>
             )}
+            <button onClick={handleLike} className='btn btn-outline-dark'>
+              <BIcon className='fs-4'>bi-hand-thumbs-up</BIcon> Like
+            </button>
           </div>
         </div>
       </div>
