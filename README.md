@@ -10,54 +10,18 @@ Reikes sukurti du projektus:
 1. Back End - JSON REST API
 2. Front End - React aplikacija
 
-## Back End
+## Inspiration urls
 
-1. Sukurti nauja express projekta prijungti reikiamas bibliotekas
-2. Sukurti duomenu baze "type19_trips_db"
-3. Sukurti lenteles trips, countries, users
-4. Sukurti kelis irasus kiekvienoje lenteleje
+1. https://www.figma.com/community/file/1182308758714734501
+2. https://www.figma.com/community/file/1219890698200192960
 
-### Trips lentele
+## Back end url
 
-Laukai:
-
-- id, name, date, country, city, rating, description, price, is_deleted, user_id, created_at, image_main, images_1, images_2, images_3
-
-### Countries lentele
-
-Laukai:
-
-- id, name, description, image_main, is_deleted
-
-### Users lentele
-
-Laukai:
-
-- id, username, password, email, is_deleted
-
-## Routes
-
-### Trips Routai
-
-1. GET /trips - grazinti visus irasus
-2. GET /trips/:id - grazinti viena irasa pagal id
-3. POST /trips - sukurti nauja irasa
-4. DELETE /trips/:id - istrinti irasa
-
-### Countries Routai
-
-1. GET /countries - grazinti visus irasus
-2. GET /countries/:id - grazinti viena irasa pagal id
-3. POST /countries - sukurti nauja irasa
-4. DELETE /countries/:id - istrinti irasa
-   4.1. DELETE /countries/:id - leisti istrinti tik jei savininkas istrina (extra)
-
-### Auth Routai
-
-1. POST /register - sukurti nauja vartotoja
-2. POST /login - prisijungti - patikrinti ar teisingi duomenys
+https://github.com/MariusCodeAcademy/type19_12_NODE_Mysql
 
 ## Front end
+
+inspiration https://www.figma.com/community/file/1219890698200192960
 
 Sukurti projekta su vite, naudojant typescript.
 Pradeti nuo boiler plate, su tailwind arba be.
@@ -71,6 +35,8 @@ Pradeti nuo boiler plate, su tailwind arba be.
 
 1. kreiptis i musu back end ir gauti visas keliones ir atvaizduotji jas korteliu pavidalu, be description ir be papildomu paveiksleliu.
 2. Kiekviena kortele turi nuoroda ir veda i Single Trip Page, Paveiklelis irgi turi buti nuoroda i Single Trip Page
+3. Sukurti pernaudojama komponenta TripCard ir atvaizduoti keliones
+4. Sukurti filtravima pagal sali ir miesta
 
 ### Single Trip Page
 
@@ -78,6 +44,15 @@ Pradeti nuo boiler plate, su tailwind arba be.
 2. Atvaizduojam visa informacija apie kelione su stylingu
 3. Puslapis dalinamas i 2 dalis kaireje paveikslelis, desineje informacija.
 4. Prideti mygtuka "Delete" kuris istrina kelione is back end jei vartotojas prisijunges ir savininkas
+
+### Add Trip Page
+
+1. Sukurti forma su laukais: name, date, country, city, rating, description, price, image_main, images_1, images_2, images_3
+2. Forma valdyti su useFormik.
+3. Validuoti visus laukus
+4. Siusti duomenis i back end ir sukurti nauja kelione
+5. Priklausomai nuo atsakymo parodyti pranesima ar pavyko ar ne
+6. Jei sekminga uzklausa nukreipti i Trips Page
 
 ### Countries Page
 
@@ -113,3 +88,17 @@ Pradeti nuo boiler plate, su tailwind arba be.
 Reikalingas bendras state kuris butu pasiekiamas visuose komponentuose.
 Tai galima daryti su Context arba Redux.
 State turi buti issaugomas i localstorage ir po puslapio persikrovimo tureti ta pati state.
+
+## Header komponentas
+
+1. Sukurti Header komponenta
+2. Header turi tureti navigacija i Home, Trips, Countries, Add Trip, Auth
+3. Padaryti headeri pilnai responsive su burger menu
+4. sumazinus ekrana turi atsirasti burger menu kuri paspaudus matom navigacija
+5. didesniame ekrane turi buti matoma navigacija
+6. sukurti meniu taip kad "Add Trip" butu submeniu kuris atsidaro kai uzvedam pele ant jo
+   pvz (principas toks)
+   - desktop
+     ![](assets/2024-03-15-12-56-03.png)
+   - mobile
+     ![](assets/2024-03-15-12-59-05.png)

@@ -1,0 +1,180 @@
+/* Header */
+
+.navLink {
+  /* background: #212529; */
+  /* background: var(--bg-dark); */
+}
+.navLink:hover {
+  background: #d8d8d8;
+}
+.navLink.active {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.mobileMenu.on {
+  transform: translateX(0);
+}
+
+.submenu {
+  position: absolute;
+  top: calc(100%);
+  transform: translateY(-200%);
+  left: 0;
+  min-width: 150px;
+  z-index: -1;
+  /* bottom: 0; */
+  transition: transform 0.2s ease-in-out;
+}
+.hasChildren:hover .submenu {
+  transform: translateY(0);
+  z-index: 0;
+}
+.hasChildren::after {
+  content: '▼';
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  font-size: 12px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.hasChildren > a {
+  z-index: 1;
+  position: relative;
+  /* background: #212529; */
+}
+
+/* Add trip form */
+.addFromGrid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.gridSpan2 {
+  grid-column: span 2;
+}
+
+/* Trips Page */
+
+.tripsPageGrid {
+  display: grid;
+  grid-template-columns: 295px auto;
+  gap: 30px;
+}
+
+/* Trip Card */
+
+.tripGrid {
+  display: grid;
+  grid-template-columns: 315px auto;
+  gap: 24px;
+}
+
+/* singleTripPage */
+
+.singleTripPage {
+  display: grid;
+  /* grid-template-columns: repeat(2, 1fr); */
+  grid-template-columns: 500px auto;
+  gap: 24px;
+}
+.imgGrid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.imgGrid > img,
+.slideThumb {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+.slideImg {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.swiperThumbs .swiper-slide {
+  opacity: 0.4;
+}
+.swiperThumbs .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+/* COuntries */
+
+.cImg {
+  height: 240px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.cName {
+  margin-top: -2em;
+  margin-bottom: 2em;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  padding-left: 1em;
+  z-index: 1;
+  position: relative;
+}
+.cSingleImage {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* bootrstrap md media */
+@media screen and (max-width: 992px) {
+  .hasChildren::after {
+    content: none;
+  }
+  .singleTripPage {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 24px;
+  }
+  .singleTripPage .left {
+    width: 730px;
+  }
+  .mobileMenu {
+    border: 1px solid #d8d8d8;
+    position: fixed;
+    background: white;
+    right: 0;
+    top: 50px;
+    bottom: 0;
+    min-width: 200px;
+    transition: transform 0.2s ease-in;
+    transform: translateX(100%);
+  }
+
+  .submenu {
+    position: static;
+    transform: translateY(0);
+  }
+}
+@media screen and (max-width: 768px) {
+  .singleTripPage .left {
+    width: 500px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .singleTripPage .left {
+    width: 300px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .tripsList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 24px;
+  }
+  .tripGrid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
