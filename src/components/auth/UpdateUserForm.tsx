@@ -7,6 +7,7 @@ import { useAuthCtx } from '../../store/AuthProvider';
 import { InputEl } from '../UI/InputEl';
 import { UserObjType } from '../../types/types';
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 type UpdateUserObjType = {
   name?: string;
@@ -58,11 +59,13 @@ export default function UpdateUserForm({ email, name, userId }: UpdateUserFormPr
   }, [email, name]);
 
   function sendUpdateDataToBack(data: Omit<UpdateUserObjType, 'passwordConfirm'>) {
-    console.log('data sending ===', data);
     axios
       .put(`${beBaseUrl}/auth/user/update/${userId}`, data)
       .then((res: AxiosResponse<UserObjType>) => {
         console.log('res.data ===', res.data);
+        toast.success('user updated');
+
+        formik.resetForm();
       })
       .catch((err) => {
         console.warn('err sendUpdateDataToBack ===', err.response.data);
