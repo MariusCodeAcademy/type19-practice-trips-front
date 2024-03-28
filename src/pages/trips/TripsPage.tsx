@@ -19,13 +19,41 @@ export default function TripsPage() {
   let sortedArr = tripsArr !== null ? [...tripsArr] : [];
 
   switch (sortOptVal) {
+    case 'date-min-to-max':
+      // console.log('date-min-to-max sort');
+      sortedArr.sort((a, b) => {
+        const aDateMs = new Date(a.date).getTime();
+        const bDateMs = new Date(b.date).getTime();
+        return aDateMs - bDateMs;
+      });
+      break;
+    case 'date-max-to-min':
+      // console.log('date-min-to-max sort');
+      sortedArr.sort((a, b) => {
+        const aDateMs = new Date(a.date).getTime();
+        const bDateMs = new Date(b.date).getTime();
+        return bDateMs - aDateMs;
+      });
+      break;
     case 'price-min-to-max':
-      console.log('price-min-to-max sort');
+      // console.log('price-min-to-max sort');
       sortedArr.sort((a, b) => a.price - b.price);
       break;
+    case 'stars-min-to-max':
+      // console.log('stars-min-to-max sort');
+      sortedArr.sort((a, b) => a.rating - b.rating);
+      break;
+    case 'stars-max-to-min':
+      // console.log('stars-max-to-min sort');
+      sortedArr.sort((a, b) => b.rating - a.rating);
+      break;
     case 'country-a-z':
-      console.log('price-min-to-max sort');
+      // console.log('country-a-z sort');
       sortedArr.sort((a, b) => a.country.localeCompare(b.country));
+      break;
+    case 'country-z-a':
+      // console.log('country-z-a sort');
+      sortedArr.sort((a, b) => b.country.localeCompare(a.country));
       break;
     default:
       console.log('default sort');
@@ -88,15 +116,15 @@ export default function TripsPage() {
               <option value={'price-min-to-max'}>Price min to max</option>
               <option value={'dalykas'}>Price max to min</option>
               <option value={'country-a-z'}>Country a-z</option>
-              <option value={'dalykas'}>Country z-a</option>
+              <option value={'country-z-a'}>Country z-a</option>
               <option value={'city-a-z'}>City a-z</option>
               <option value={'dalykas'}>City z-a</option>
               <option value={'stars-min-to-max'}>Stars min-max</option>
-              <option value={'dalykas'}>Stars max-min</option>
+              <option value={'stars-max-to-min'}>Stars max-min</option>
               <option value={'email-a-z'}>Email a-z</option>
               <option value={'dalykas'}>Email z-a</option>
               <option value={'date-min-to-max'}>Date min-max</option>
-              <option value={'date-min-to-max'}>Date max-min</option>
+              <option value={'date-max-to-min'}>Date max-min</option>
             </select>
             <TripsList list={sortedArr} />
           </div>
