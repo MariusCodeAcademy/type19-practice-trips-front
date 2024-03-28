@@ -3,7 +3,7 @@ import TripCard from './TripCard';
 
 //
 type TripsListProps = {
-  list?: (TripObjType & { email: string })[] | null;
+  list?: (TripObjType & { email?: string })[] | null;
   archive?: boolean;
 };
 

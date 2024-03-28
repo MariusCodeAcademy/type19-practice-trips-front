@@ -7,7 +7,7 @@ import { useAuthCtx } from '../../store/AuthProvider';
 import Button from '../UI/Button';
 
 type TripCardProps = {
-  item: Omit<TripObjType, 'description'> & { email: string };
+  item: Omit<TripObjType, 'description'> & { email?: string };
   archive?: boolean;
 };
 

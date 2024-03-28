@@ -7,13 +7,14 @@ import { countriesUrl, tripsUrl } from './../../config';
 import axios, { AxiosError } from 'axios';
 import { AxiosResponse } from 'axios';
 import { getNiceDate } from '../../utils/helpers';
+import TripsList from '../../components/trips/TripsList';
 
 export default function SingleCountryPage() {
   // reikalingas sitos salies kuria atvaizduojam id
   const { countryId } = useParams() as { countryId: string };
   console.log('countryId ===', countryId);
   const [currentCountry, setCurrentCountry] = useState<CountryObjType | null>(null);
-  const [tripsArr, setTripsArr] = useState<TripObjType>([]);
+  const [tripsArr, setTripsArr] = useState<TripObjType[]>([]);
   // paarsisiusti sali
   const currentCountryUrl = `${countriesUrl}/${countryId}`;
   useEffect(() => {
@@ -59,12 +60,17 @@ export default function SingleCountryPage() {
         <h2 className='h4'>Description:</h2>
         <p className='lead'>{currentCountry?.description}</p>
         <p>Created: {getNiceDate(currentCountry?.created_at || '0')}</p>
+        <hr />
         <section>
-          <h3 className=''>Trips for this country:</h3>
-          <ul>
-            <li>trip1</li>
-            <li>trip2</li>
-          </ul>
+          <h3 className='mb-4 fw-normal'>Trips for this country:</h3>
+          {/* <ul className='list-group'>
+            {tripsArr.map((trObj) => (
+              <li className='list-group-item' key={trObj.id}>
+                {trObj.name} - price: {trObj.price}
+              </li>
+            ))}
+          </ul> */}
+          <TripsList list={tripsArr} />
         </section>
       </div>
     </div>
