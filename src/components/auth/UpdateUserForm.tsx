@@ -23,7 +23,7 @@ type UpdateUserFormProps = {
 };
 
 export default function UpdateUserForm({ email, name, userId }: UpdateUserFormProps) {
-  console.log('UpdateUserForm userInfo ===', email, name);
+  // console.log('UpdateUserForm userInfo ===', email, name);
   const formik = useFormik<UpdateUserObjType>({
     initialValues: {
       name: name,
@@ -66,9 +66,17 @@ export default function UpdateUserForm({ email, name, userId }: UpdateUserFormPr
       })
       .catch((err) => {
         console.warn('err sendUpdateDataToBack ===', err.response.data);
+        // pagauti klaida kurios kodas pass
+        if (err.response.data.code === 'pass') {
+          console.warn('bogas dabartinis pass');
+          formik.setFieldError('currentPassword', 'Check you password');
+        }
       });
   }
-
+  // const errObj = {
+  //   code: 45,
+  //   msg: 'wowo owo wo oww o',
+  // };
   return (
     <div>
       <div className='mt-5'>
