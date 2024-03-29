@@ -7,7 +7,7 @@ import { useAuthCtx } from '../../store/AuthProvider';
 import Button from '../UI/Button';
 
 type TripCardProps = {
-  item: Omit<TripObjType, 'description'> & { email?: string };
+  item: Omit<TripObjType, 'description'> & { email?: string; likes: number };
   archive?: boolean;
 };
 
@@ -19,7 +19,10 @@ export default function TripCard({ item, archive }: TripCardProps) {
     <div className={cl('border p-4 rounded tripGrid', { 'bg-dark-subtle': email === item.email })}>
       <img src={'/img/' + item.image_main} alt={item.name} className='img-fluid' />
       <div className='info'>
-        <h3 className='h4'>{item.name}</h3>
+        <div className='d-flex justify-content-between align-items-center'>
+          <h3 className='h4'>{item.name}</h3>
+          <p className='mb-0'>Likes: {item.likes}</p>
+        </div>
         <p className='lead'>{getNiceDate(item.date)}</p>
         <p className=''>{item.email}</p>
         <p>

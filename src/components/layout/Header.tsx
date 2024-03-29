@@ -10,14 +10,17 @@ type NavItemProps = {
   children: string;
   subItem?: boolean;
   onClick?: () => void;
+  hasChildren?: boolean;
 };
 
-export function NavItem({ to, children, subItem, onClick }: NavItemProps) {
+export function NavItem({ to, children, subItem, onClick, hasChildren }: NavItemProps) {
   return (
     <NavLink
       onClick={onClick}
       end
-      className={`${subItem ? 'fs-6' : 'fs-6'} px-4 py-2 d-block navLink`}
+      className={`${subItem ? 'fs-6' : 'fs-6'} ${
+        hasChildren ? 'ps-4 pe-5' : 'px-4'
+      } py-2 d-block navLink`}
       to={to}>
       {children}
     </NavLink>
@@ -49,7 +52,9 @@ export default function Header() {
               <NavItem to='/'>Home</NavItem>
             </li>
             <li className='hasChildren position-relative'>
-              <NavItem to='/trips'>Trips</NavItem>
+              <NavItem hasChildren to='/trips'>
+                Trips
+              </NavItem>
               <ul className='submenu ps-3 ps-lg-0 unlisted bg-white border  rounded-bottom-2 overflow-hidden'>
                 <li>
                   <NavItem subItem to='/trips/add'>

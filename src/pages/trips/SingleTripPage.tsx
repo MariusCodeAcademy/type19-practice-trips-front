@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { TripObjType } from '../../types/types';
 import { beBaseUrl } from '../../config';
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { getNiceDate } from '../../utils/helpers';
 import toast from 'react-hot-toast';
 import SwiperTest from '../../components/UI/SwiperTest';
@@ -21,8 +21,11 @@ export default function SingleTripPage() {
 
   const { email, userId } = useAuthCtx();
 
-  const [currentTrip, setCurrentTrip] = useState<(TripObjType & { email: string }) | null>(null);
-  // console.log('currentTrip ===', currentTrip);
+  const [currentTrip, setCurrentTrip] = useState<
+    (TripObjType & { email: string; likes: number }) | null
+  >(null);
+  const [likedAlready, setLikedAlready] = useState(false);
+  console.log('currentTrip ===', JSON.stringify(currentTrip, null, 2));
   // const isOwner = email === currentTrip?.email;
   const isOwner = true;
 
@@ -32,6 +35,7 @@ export default function SingleTripPage() {
   useEffect(() => {
     // console.log('cUrl ===', cUrl);
     getTrip(cUrl);
+    didUserLikeThePost();
   }, [cUrl]);
 
   async function getTrip(url: string) {
@@ -75,9 +79,23 @@ export default function SingleTripPage() {
       .post(`${beBaseUrl}/likes`, newLike)
       .then((resp) => {
         console.log('resp ===', resp.data);
+        setLikedAlready(true);
       })
       .catch((error) => {
         console.warn('newLike ivyko klaida:', error);
+      });
+  }
+
+  function didUserLikeThePost() {
+    const path = `${beBaseUrl}/likes/user/${userId}/${tripId}`;
+    axios
+      .get(path)
+      .then((resp: AxiosResponse<boolean>) => {
+        console.log('resp ===', resp);
+        setLikedAlready(resp.data);
+      })
+      .catch((error) => {
+        console.warn('ivyko klaida:', error);
       });
   }
 
@@ -96,12 +114,14 @@ export default function SingleTripPage() {
         </div>
         <div className='right'>
           <h1 className='display-2'>{currentTrip?.name}</h1>
+
           <p className='lead'>{getNiceDate(currentTrip?.date || '')}</p>
+          <p>Likes: {currentTrip?.likes || 0}</p>
           <p>
             <span className='fw-bold'>{currentTrip?.country}</span> - {currentTrip?.city}
           </p>
           <p className=''>{currentTrip?.description}</p>
-          <div className='control d-flex gap-2'>
+          <div className='control d-flex gap-2 align-items-start'>
             <Link to={'/trips'}>
               <button className='btn btn-secondary'>Go back</button>
             </Link>
@@ -110,8 +130,9 @@ export default function SingleTripPage() {
                 Delete
               </button>
             )}
-            <button onClick={handleLike} className='btn btn-outline-dark'>
-              <BIcon className='fs-4'>bi-hand-thumbs-up</BIcon> Like
+            <button disabled={likedAlready} onClick={handleLike} className='btn btn-outline-dark'>
+              <BIcon className='fs-6'>bi-hand-thumbs-up</BIcon>
+              {!likedAlready ? 'Like' : 'You liked this post'}
             </button>
           </div>
         </div>
