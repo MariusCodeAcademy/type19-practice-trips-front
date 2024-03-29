@@ -93,7 +93,8 @@ export default function TripsPage() {
         setIsLoading(false);
       });
   }
-
+  console.log('sortOptVal ===', sortOptVal);
+  const tripCount = sortedArr.length;
   return (
     <div>
       <div className='container'>
@@ -106,26 +107,31 @@ export default function TripsPage() {
           <TripsFilters onFilterChange={setFilterVal} />
 
           {/* TripsList */}
-          <div className=''>
-            <p>active sort: {sortOptVal}</p>
-            <select
-              value={sortOptVal}
-              onChange={(e) => setSortOptVal(e.target.value)}
-              className='form-select w-25'>
-              <option value={''}>Sort By</option>
-              <option value={'price-min-to-max'}>Price min to max</option>
-              <option value={'dalykas'}>Price max to min</option>
-              <option value={'country-a-z'}>Country a-z</option>
-              <option value={'country-z-a'}>Country z-a</option>
-              <option value={'city-a-z'}>City a-z</option>
-              <option value={'dalykas'}>City z-a</option>
-              <option value={'stars-min-to-max'}>Stars min-max</option>
-              <option value={'stars-max-to-min'}>Stars max-min</option>
-              <option value={'email-a-z'}>Email a-z</option>
-              <option value={'dalykas'}>Email z-a</option>
-              <option value={'date-min-to-max'}>Date min-max</option>
-              <option value={'date-max-to-min'}>Date max-min</option>
-            </select>
+          <div className='right'>
+            <div className='d-flex justify-content-between'>
+              <div className='sortas'>
+                {sortOptVal !== '' && <p>active sort: {sortOptVal}</p>}
+                <select
+                  value={sortOptVal}
+                  onChange={(e) => setSortOptVal(e.target.value)}
+                  className='form-select'>
+                  <option value={''}>Sort By</option>
+                  <option value={'price-min-to-max'}>Price min to max</option>
+                  <option value={'dalykas'}>Price max to min</option>
+                  <option value={'country-a-z'}>Country a-z</option>
+                  <option value={'country-z-a'}>Country z-a</option>
+                  <option value={'city-a-z'}>City a-z</option>
+                  <option value={'dalykas'}>City z-a</option>
+                  <option value={'stars-min-to-max'}>Stars min-max</option>
+                  <option value={'stars-max-to-min'}>Stars max-min</option>
+                  <option value={'email-a-z'}>Email a-z</option>
+                  <option value={'dalykas'}>Email z-a</option>
+                  <option value={'date-min-to-max'}>Date min-max</option>
+                  <option value={'date-max-to-min'}>Date max-min</option>
+                </select>
+              </div>
+              <div>Showing Trips: {tripCount}</div>
+            </div>
             <TripsList list={sortedArr} />
           </div>
           {/* <ul className='unlisted tripsList'>

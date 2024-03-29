@@ -55,7 +55,7 @@ export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
   const noFilterActive = countySelVal === 'all' && citySelValue === 'all' && starsSelected === 0;
 
   return (
-    <div>
+    <aside>
       {!noFilterActive && (
         <FilterBox className='bg-primary-subtle' title='Active Filters'>
           {countySelVal !== 'all' && <p>Country: {countySelVal}</p>}
@@ -129,6 +129,6 @@ export function TripsFilters({ onFilterChange }: TripsFiltersProps) {
           clear
         </button>
       </FilterBox>
-    </div>
+    </aside>
   );
 }
